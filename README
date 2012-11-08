@@ -1,0 +1,5 @@
+API Race Detector
+
+opt: llvm instrument pass
+rtl: runtime library
+
