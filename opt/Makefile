@@ -19,4 +19,4 @@ all: $(objs)
 	$(CXX) $(CFLAGS) -shared $< -o $(LIBDIR)/$@ $(LDFLAGS)
 
 clean:
-	rm -f *.o
+	rm -f *.o $(LIBDIR)/*.so
