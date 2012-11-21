@@ -14,7 +14,7 @@ instr:
 	$(MAKE) -C opt -f Makefile
 
 test:
-	$(MAKE) -C test -f Makefile
+	$(MAKE) -C tests -f Makefile
 
 clean:
 	rm -f $(LIBDIR)/*.so $(LIBDIR)/libtsan.a
