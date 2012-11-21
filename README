@@ -1,5 +1,8 @@
 API Race Detector
 
 opt: llvm instrument pass
-rtl: runtime library
+tsan-rtl: runtime library
 
+
+>>>How to compile?
+make

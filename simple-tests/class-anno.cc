@@ -2,29 +2,50 @@
 #include <pthread.h>
 #include <stdio.h>
 
+void * call_back1(void* A_ptr);
+void * call_back2(void* A_ptr);
+
 class A {
-    static int Global;
+    int member;
 
   public:
-    static void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        Global++;
+    void * __attribute__((annotate("self-write"))) Thread1(void *x) {
+        member++;
+        return NULL;
+    }
+    void *__attribute__((annotate("self-write")))  Thread2(void *x) {
+        member--;
         return NULL;
     }
 
-    static void *__attribute__((annotate("self-write")))  Thread2(void *x) {
-        Global--;
-        return NULL;
+    friend void* call_back1(void* A_ptr);
+    friend void* call_back2(void* A_ptr);
+
+    void create_thread1(pthread_t* t) {
+        pthread_create(t, NULL, call_back1, this);
+    }
+    void create_thread2(pthread_t* t) {
+        pthread_create(t, NULL, call_back2, this);
     }
 };
 
-int A::Global = 0;
+void * call_back1(void* A_ptr) {
+    static_cast<A*>(A_ptr)->Thread1(NULL);
+    return NULL;
+}
+
+void * call_back2(void* A_ptr) {
+    static_cast<A*>(A_ptr)->Thread2(NULL);
+    return NULL;
+}
 
 int main() {
-  pthread_t t[2];
-  pthread_create(&t[0], NULL, A::Thread1, NULL);
-  pthread_create(&t[1], NULL, A::Thread2, NULL);
-  pthread_join(t[0], NULL);
-  pthread_join(t[1], NULL);
+    pthread_t t[2];
+    A aa;
+    aa.create_thread1(&t[0]);
+    aa.create_thread2(&t[1]);
+    pthread_join(t[0], NULL);
+    pthread_join(t[1], NULL);
 }
 
 // CHECK: WARNING: ThreadSanitizer: data race

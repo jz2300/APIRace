@@ -9,7 +9,7 @@ LDFLAGS= -lpthread -ldl -lm
 
 objs = $(patsubst %.cpp,%.so,$(wildcard *.cpp))
 
-all: $(objs)
+all: $(objs) clean
 
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -fPIC -I$(LLVM_ROOT) -c $< -o $@
@@ -19,4 +19,6 @@ all: $(objs)
 	$(CXX) $(CFLAGS) -shared $< -o $(LIBDIR)/$@ $(LDFLAGS)
 
 clean:
-	rm -f *.o $(LIBDIR)/*.so
+	rm -f *.o
+
+

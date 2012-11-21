@@ -3,14 +3,16 @@ MAKE=make
 
 LIBDIR=./lib
 
-libs: $(LIBDIR)/libtsan.a $(LIBDIR)/APIRaceInstr.so
+libs: rtl instr
+
+rtl: $(LIBDIR)/libtsan.a
 
 $(LIBDIR)/libtsan.a:
 	cd tsan-rtl; $(SH) rtl.sh
 
-$(LIBDIR)/APIRaceInstr.so:
+instr:
 	$(MAKE) -C opt -f Makefile
 
 clean:
-	rm -f lib/*.so libtsan.a
+	rm -f $(LIBDIR)/*.so $(LIBDIR)/libtsan.a
 

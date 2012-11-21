@@ -9,6 +9,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/DataLayout.h"
 #include "llvm/ADT/Statistic.h"
+#include <map>
 using namespace llvm;
 
 namespace {
