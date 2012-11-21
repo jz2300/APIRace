@@ -10,6 +10,7 @@ sed -i 's/-Werror/-Wall/g' ./compiler-rt/lib/tsan/rtl/Makefile.old
 (cd compiler-rt/lib/tsan && make -f Makefile.old libtsan)
 
 #copy libtsan.a
+mkdir -p ../lib
 cp ./compiler-rt/lib/tsan/rtl/libtsan.a ../lib
 
 #cleanup
