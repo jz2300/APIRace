@@ -20,7 +20,7 @@ test: $(exes)
 	clang++ -fPIE $(CXXFLAG) -c $<
 
 %.instr.x: %.instr.o
-	clang++ -o $@ -pie -lpthread -ldl $(LIBDIR)/libtsan.a $<
+	clang++ -pie -o $@ $< -lpthread -ldl $(LIBDIR)/libtsan.a
 
 clean:
 	rm -rf *.bc *.x

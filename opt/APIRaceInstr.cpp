@@ -9,9 +9,11 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/DataLayout.h"
 #include "llvm/ADT/Statistic.h"
-#include "llvm/ADT/SmallString.h"               // SmallString
+#include "llvm/ADT/SmallString.h"               // class SmallString
+#include "llvm/ADT/SmallSet.h"                  // class SmallSet
 #include "llvm/ADT/StringExtras.h"              // itostr
 #include "llvm/Transforms/Utils/ModuleUtils.h"  // appendToGlobalCtors
+#include <map>
 using namespace llvm;
 
 namespace {
@@ -31,6 +33,13 @@ struct APIRace : public FunctionPass {
     typedef std::map<std::string, std::string> AnnotationMap;
     AnnotationMap AT;  // [ FunName : Annotation ]
     bool getFuncAnnotations(Module &M);
+
+    // utility for instrumentation
+    void groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalLoadAndStores,
+            SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers );
+    bool instrumentLoadedAndStoredMemberInFunction( Function &F, 
+            SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers );
+
 
     // TSAN: original tsan rtl functions
     Function *TsanFuncEntry;
@@ -143,8 +152,37 @@ bool APIRace::doInitialization(Module &M) {
     return true;
 }
 
+static bool isSyncCall(Instruction *I) {
+    static const char * syncCallList[] = {
+        "pthread_join",
+        "pthread_barrier_wait",
+        // TODO: add other synchronization functions in Pthreads API
+    };
+    static int numOfSyncCalls = sizeof(syncCallList)/sizeof(syncCallList[0]);
+
+    CallInst *CI = cast<CallInst>(I);
+    Function *F = CI->getCalledFunction();
+    StringRef funcName = F->getName();
+    
+    for (int i=0; i<numOfSyncCalls; ++i) {
+        if (funcName == syncCallList[i]) {
+            errs() << "isSyncCall found a call to \'" << funcName << "\' in instruction \"" << *I << "\"\n";
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalLoadAndStores,
+    SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers ) {
+
+}
+
 bool APIRace::runOnFunction(Function &F) {
     // print out user-defined annotation
+    // TODO: we could use annotation string to specify special treatment to certain member, or
+    //      different checking granularity
     errs() << "APIRace: ";
     AnnotationMap::iterator ann = AT.find(F.getName());
     errs() << F.getName() << " : " << ( (ann == AT.end()) ? "No Annotation" : ann->second )<< '\n';
@@ -154,7 +192,7 @@ bool APIRace::runOnFunction(Function &F) {
     // (2) check for calls to pthread_*
 
     SmallVector<Instruction*, 8> LocalLoadsAndStores;
-    SmallVector<Value*, 8> AllMembers;
+    SmallSet<Value*, 8> AllLoadedMembers, AllStoredMembers;
     bool Res = false;
     bool HasSync = false;
 
@@ -164,19 +202,24 @@ bool APIRace::runOnFunction(Function &F) {
             if (isa<LoadInst>(BI) || isa<StoreInst>(BI)) {
                 LocalLoadsAndStores.push_back(BI); 
             } else if (isa<CallInst>(BI) || isa<InvokeInst>(BI)) {
-                if (HasSync = checkSyncCall(BI)) break;
+                if ( (HasSync = isSyncCall(BI)) ) break;
             }
         }
-        analyzeLoadAndStoreOperands( LocalLoadsAndStores, AllMembers );
+        groupLoadedAndStoredMembers( LocalLoadsAndStores, AllLoadedMembers, AllStoredMembers );
     }
 
     if (HasSync) {  // slow path, instrument every load/store
-        Res |= instrumentEveryLoadAndStore(
-        
+       // Res |= instrumentEveryLoadAndStore(F); 
     } 
     else { // instrument this function
-        Res |= instrumentMemberLoadAndStore(F, AllMembers);
+        Res |= instrumentLoadedAndStoredMemberInFunction( F, AllLoadedMembers, AllStoredMembers );
     }
     return Res;
 }
 
+bool APIRace::instrumentLoadedAndStoredMemberInFunction( Function &F, 
+    SmallSet<Value*,8> &AllLoadedMembers, SmallSet<Value*,8> &AllStoredMembers ) {
+
+
+    return true;
+}

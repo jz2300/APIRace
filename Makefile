@@ -18,4 +18,5 @@ test:
 
 clean:
 	rm -f $(LIBDIR)/*.so $(LIBDIR)/libtsan.a
+	$(MAKE) -C tests -f Makefile clean
 
