@@ -14,4 +14,4 @@ mkdir -p ../lib
 cp ./compiler-rt/lib/tsan/rtl/libtsan.a ../lib
 
 #cleanup
-rm -rf compiler-rt
+#rm -rf compiler-rt
