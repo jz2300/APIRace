@@ -166,7 +166,7 @@ static bool isSyncCall(Instruction *I) {
     
     for (int i=0; i<numOfSyncCalls; ++i) {
         if (funcName == syncCallList[i]) {
-            errs() << "isSyncCall found a call to \'" << funcName << "\' in instruction \"" << *I << "\"\n";
+            errs() << "isSyncCall: found a call to \'" << funcName << "\' in instruction \"" << *I << "\"\n";
             return true;
         }
     }
@@ -176,16 +176,51 @@ static bool isSyncCall(Instruction *I) {
 
 void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalLoadAndStores,
     SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers ) {
+    
+    
+}
 
+/**
+ * Extract the class name from the given PointerType. 
+ * OUTPUT: if is a class, return its name in format of "class.XXXX"; 
+ *         otherwise, return "";
+ *
+ * NOTE: given a class with name A, in llvm, a StructType with name "class.A" is 
+ * declared to represent class A, like
+ *                
+ * %class.A = type { i32 }
+ *
+ */
+static StringRef getClassName(PointerType *PT) {
+    Type * baseTy = PT->getElementType();
+    if (!isa<StructType>(baseTy)) return StringRef("");
+    StructType * ST = cast<StructType>(baseTy);
+    StringRef className = ST->getName();
+    static StringRef prefix = StringRef("class.");
+    if (!className.startswith(prefix)) return StringRef("");
+    return className;
+}
+
+static StringRef getClassNameOfMemberFunc(Function &F) {
+    Function::arg_iterator argIt = F.arg_begin();
+    Value * firstArg = argIt;                                       // get 1st argument
+    Type * typeOfFirstArg = firstArg->getType();                    //     its type
+    if (!isa<PointerType>(typeOfFirstArg)) return StringRef("");
+    return getClassName(cast<PointerType>(typeOfFirstArg));
 }
 
 bool APIRace::runOnFunction(Function &F) {
     // print out user-defined annotation
     // TODO: we could use annotation string to specify special treatment to certain member, or
     //      different checking granularity
-    errs() << "APIRace: ";
     AnnotationMap::iterator ann = AT.find(F.getName());
     errs() << F.getName() << " : " << ( (ann == AT.end()) ? "No Annotation" : ann->second )<< '\n';
+
+    // check whether F is a non-static member function for a class
+    // if not, do nothing and return false
+    StringRef className = getClassNameOfMemberFunc(F);
+    if (className.size()==0) return false;
+    errs() << F.getName() << " : " << className <<'\n';  
 
     // Traverse all instructions in this function:
     // (1) collect loads/stores/returns, involving a class member
@@ -194,7 +229,7 @@ bool APIRace::runOnFunction(Function &F) {
     SmallVector<Instruction*, 8> LocalLoadsAndStores;
     SmallSet<Value*, 8> AllLoadedMembers, AllStoredMembers;
     bool Res = false;
-    bool HasSync = false;
+    bool HasSyncCall = false;
 
     for (Function::iterator FI = F.begin(), FE = F.end(); FI != FE; ++FI) {
         BasicBlock &BB = *FI;
@@ -202,13 +237,14 @@ bool APIRace::runOnFunction(Function &F) {
             if (isa<LoadInst>(BI) || isa<StoreInst>(BI)) {
                 LocalLoadsAndStores.push_back(BI); 
             } else if (isa<CallInst>(BI) || isa<InvokeInst>(BI)) {
-                if ( (HasSync = isSyncCall(BI)) ) break;
+                if ( (HasSyncCall = isSyncCall(BI)) ) break;
             }
         }
+        if (HasSyncCall) break;
         groupLoadedAndStoredMembers( LocalLoadsAndStores, AllLoadedMembers, AllStoredMembers );
     }
 
-    if (HasSync) {  // slow path, instrument every load/store
+    if (HasSyncCall) {  // slow path, instrument every load/store
        // Res |= instrumentEveryLoadAndStore(F); 
     } 
     else { // instrument this function
