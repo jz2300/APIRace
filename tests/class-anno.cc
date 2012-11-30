@@ -6,15 +6,20 @@ void * call_back1(void* A_ptr);
 void * call_back2(void* A_ptr);
 
 class A {
+    int dummy;
     int member;
+    int xyz;
 
   public:
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        member++;
+        member--;
+        xyz++;
+        int ii = dummy;
         return NULL;
     }
     void *__attribute__((annotate("self-write")))  Thread2(void *x) {
-        member--;
+        member++;
+        xyz--;
         return NULL;
     }
 

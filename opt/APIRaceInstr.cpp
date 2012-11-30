@@ -35,10 +35,13 @@ struct APIRace : public FunctionPass {
     bool getFuncAnnotations(Module &M);
 
     // utility for instrumentation
-    void groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalLoadAndStores,
-            SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers );
+    void groupAllUsedMembers( StringRef &TargetClassName,
+        SmallVectorImpl<Instruction*> &LocalGetElementPtrs, SmallSet<Value*, 8> &AllUsedMembers );
+    void groupLoadedAndStoredMembers( StringRef &TargetClassName, 
+        SmallVectorImpl<Instruction*> &LocalLoadAndStores,
+        std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers );
     bool instrumentLoadedAndStoredMemberInFunction( Function &F, 
-            SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers );
+        std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers );
 
 
     // TSAN: original tsan rtl functions
@@ -54,6 +57,60 @@ struct APIRace : public FunctionPass {
 };
 
 }
+
+/**
+ * Extract the class name from the given PointerType. 
+ * OUTPUT: if is a class, return its name in format of "class.XXXX"; 
+ *         otherwise, return "";
+ *
+ * NOTE: given a class with name A, in llvm, a StructType with name "class.A" is 
+ * declared to represent class A, like
+ *                
+ * %class.A = type { ... , ... }
+ *
+ */
+static StringRef getClassName(Type *PT) {
+    if (!isa<PointerType>(PT)) return StringRef("");
+    Type * baseTy = cast<PointerType>(PT)->getElementType();
+    if (!isa<StructType>(baseTy)) return StringRef("");
+    StructType * ST = cast<StructType>(baseTy);
+    StringRef className = ST->getName();
+    static StringRef prefix = StringRef("class.");
+    if (!className.startswith(prefix)) return StringRef("");
+    return className;
+}
+
+static StringRef getClassNameOfMemberFunc(Function &F) {
+    Function::arg_iterator argIt = F.arg_begin();
+    Value * firstArg = argIt;                                       // get 1st argument
+    Type * typeOfFirstArg = firstArg->getType();                    //     its type
+    return getClassName(typeOfFirstArg);
+}
+
+static bool isSyncCall(Instruction *I) {
+    static const char * syncCallList[] = {
+        "pthread_join",
+        "pthread_barrier_wait",
+        // TODO: add other synchronization functions in Pthreads API
+    };
+    static int numOfSyncCalls = sizeof(syncCallList)/sizeof(syncCallList[0]);
+
+    CallInst *CI = cast<CallInst>(I);
+    Function *F = CI->getCalledFunction();
+    StringRef funcName = F->getName();
+    
+    for (int i=0; i<numOfSyncCalls; ++i) {
+        if (funcName == syncCallList[i]) {
+            errs() << "isSyncCall: found a call to \'" << funcName << "\' in instruction \"" << *I << "\"\n";
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+
 
 char APIRace::ID = 0;
 static RegisterPass<APIRace> X("apirace",
@@ -152,61 +209,64 @@ bool APIRace::doInitialization(Module &M) {
     return true;
 }
 
-static bool isSyncCall(Instruction *I) {
-    static const char * syncCallList[] = {
-        "pthread_join",
-        "pthread_barrier_wait",
-        // TODO: add other synchronization functions in Pthreads API
-    };
-    static int numOfSyncCalls = sizeof(syncCallList)/sizeof(syncCallList[0]);
-
-    CallInst *CI = cast<CallInst>(I);
-    Function *F = CI->getCalledFunction();
-    StringRef funcName = F->getName();
+void APIRace::groupAllUsedMembers( StringRef &TargetClassName, 
+    SmallVectorImpl<Instruction*> &LocalGetElementPtrs, SmallSet<Value*, 8> &AllUsedMembers ) {
     
-    for (int i=0; i<numOfSyncCalls; ++i) {
-        if (funcName == syncCallList[i]) {
-            errs() << "isSyncCall: found a call to \'" << funcName << "\' in instruction \"" << *I << "\"\n";
-            return true;
-        }
-    }
+    for ( SmallVectorImpl<Instruction*>::reverse_iterator It = LocalGetElementPtrs.rbegin(),
+        End = LocalGetElementPtrs.rend(); It != End; ++It ) {
 
+        GetElementPtrInst *GEP = cast<GetElementPtrInst>(*It);
+        Value *base = GEP->getPointerOperand();
+        Type *baseTy = base->getType();
+        StringRef className = getClassName(baseTy);
+        if (className.size() == 0) continue;
+        // FIXME: this is not working for friend function...
+        if (className != TargetClassName) continue;
+
+        AllUsedMembers.insert(GEP);
+        errs() << GEP->getName() << " : " << className << "\n"; 
+    }
+}
+
+static bool isMemberOfClass( StringRef &TargetClassName, Value *Member ) {
+    GetElementPtrInst *GEP = dyn_cast<GetElementPtrInst>(Member);
+    if ( GEP ) {
+        Value *base = GEP->getPointerOperand();
+        Type *baseTy = base->getType();
+        StringRef className = getClassName(baseTy);
+        // FIXME: this is not working for friend function...
+        if (className == TargetClassName) return true;
+    }
     return false;
 }
 
-void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalLoadAndStores,
-    SmallSet<Value*, 8> &AllLoadedMembers, SmallSet<Value*, 8> &AllStoredMembers ) {
+void APIRace::groupLoadedAndStoredMembers( StringRef &TargetClassName,
+    SmallVectorImpl<Instruction*> &LocalLoadAndStores,
+    std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers ) {
     
-    
-}
+    for ( SmallVectorImpl<Instruction*>::reverse_iterator It = LocalLoadAndStores.rbegin(),
+        End = LocalLoadAndStores.rend(); It != End; ++It ) {
+        
+        if (StoreInst *SI = dyn_cast<StoreInst>(*It)) {
+            Value *PointerOperand = SI->getPointerOperand();
+            if ( isMemberOfClass(TargetClassName, PointerOperand) ) 
+                AllStoredMembers.insert(PointerOperand);
+        } 
+    }
 
-/**
- * Extract the class name from the given PointerType. 
- * OUTPUT: if is a class, return its name in format of "class.XXXX"; 
- *         otherwise, return "";
- *
- * NOTE: given a class with name A, in llvm, a StructType with name "class.A" is 
- * declared to represent class A, like
- *                
- * %class.A = type { i32 }
- *
- */
-static StringRef getClassName(PointerType *PT) {
-    Type * baseTy = PT->getElementType();
-    if (!isa<StructType>(baseTy)) return StringRef("");
-    StructType * ST = cast<StructType>(baseTy);
-    StringRef className = ST->getName();
-    static StringRef prefix = StringRef("class.");
-    if (!className.startswith(prefix)) return StringRef("");
-    return className;
-}
+    for ( SmallVectorImpl<Instruction*>::reverse_iterator It = LocalLoadAndStores.rbegin(),
+        End = LocalLoadAndStores.rend(); It != End; ++It ) {
 
-static StringRef getClassNameOfMemberFunc(Function &F) {
-    Function::arg_iterator argIt = F.arg_begin();
-    Value * firstArg = argIt;                                       // get 1st argument
-    Type * typeOfFirstArg = firstArg->getType();                    //     its type
-    if (!isa<PointerType>(typeOfFirstArg)) return StringRef("");
-    return getClassName(cast<PointerType>(typeOfFirstArg));
+        if (LoadInst *LI = dyn_cast<LoadInst>(*It)) {
+            Value *PointerOperand = LI->getPointerOperand();
+            // we will write it, so ignore the read
+            if ( AllStoredMembers.count(PointerOperand) ) continue;   
+            // TODO: in TSAN, addrPointsToConstantData
+            if ( isMemberOfClass(TargetClassName, PointerOperand) )
+                AllLoadedMembers.insert(PointerOperand);
+        }
+    }
+    LocalLoadAndStores.clear();
 }
 
 bool APIRace::runOnFunction(Function &F) {
@@ -220,14 +280,20 @@ bool APIRace::runOnFunction(Function &F) {
     // if not, do nothing and return false
     StringRef className = getClassNameOfMemberFunc(F);
     if (className.size()==0) return false;
-    errs() << F.getName() << " : " << className <<'\n';  
+    errs() << F.getName() << " is a member function of " << className <<'\n';  
 
     // Traverse all instructions in this function:
     // (1) collect loads/stores/returns, involving a class member
     // (2) check for calls to pthread_*
+    //
+    // TODO: actually, we need to do 2 runs on functions
+    // 1. first run to check whether its contains a call, which (directly or indirectly via 
+    // calls inside) potentially calls sync barrier.
+    // 2. for correctness, we can only aggregate loads and stores on members until reaching
+    // any sync call.
 
     SmallVector<Instruction*, 8> LocalLoadsAndStores;
-    SmallSet<Value*, 8> AllLoadedMembers, AllStoredMembers;
+    std::set<Value*> AllLoadedMembers, AllStoredMembers;
     bool Res = false;
     bool HasSyncCall = false;
 
@@ -241,7 +307,8 @@ bool APIRace::runOnFunction(Function &F) {
             }
         }
         if (HasSyncCall) break;
-        groupLoadedAndStoredMembers( LocalLoadsAndStores, AllLoadedMembers, AllStoredMembers );
+        groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
+                                    AllLoadedMembers, AllStoredMembers );
     }
 
     if (HasSyncCall) {  // slow path, instrument every load/store
@@ -254,8 +321,21 @@ bool APIRace::runOnFunction(Function &F) {
 }
 
 bool APIRace::instrumentLoadedAndStoredMemberInFunction( Function &F, 
-    SmallSet<Value*,8> &AllLoadedMembers, SmallSet<Value*,8> &AllStoredMembers ) {
+    std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers ) {
 
+    for (std::set<Value*>::reverse_iterator It = AllLoadedMembers.rbegin(), 
+        End = AllLoadedMembers.rend(); It != End; ++It ) {
+
+        Value *LoadedMember = *It;
+        errs() << ">>> Load " << LoadedMember->getName() << "\n";
+    }
+
+    for (std::set<Value*>::reverse_iterator It = AllStoredMembers.rbegin(),
+        End = AllStoredMembers.rend(); It != End; ++It ) {
+
+        Value *StoredMember = *It;
+        errs() << ">>> Store " << StoredMember->getName() << "\n";
+    }
 
     return true;
 }
