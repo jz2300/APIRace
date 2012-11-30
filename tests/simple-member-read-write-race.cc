@@ -10,7 +10,7 @@ class A {
 
   public:
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        int abc = member;
+        dummy = member;
         return NULL;
     }
     void *__attribute__((annotate("self-write")))  Thread2(void *x) {

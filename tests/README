@@ -1,0 +1,14 @@
+Passed Test:
+
+simple-member-read-read-norace.cc           NO Race             PASS
+simple-member-read-write-race.cc            R-W Race            PASS
+simple-member-write-write-race.cc           W-W Race            PASS
+sleep_sync.cc                               W-W Race            PASS
+thread_leak.cc                              NO Thread Leak      PASS
+thread_leak2.cc                             Thread Leak         PASS
+race-on-heap.cc                             W-W Race            False Negative
+barrier-no-race.cc                          NO Race             PASS
+barrier-race.cc                             W-W Race            PASS
+cond-no-race.cc                             NO Race             PASS
+cond-race.cc                                W-W Race            PASS
+

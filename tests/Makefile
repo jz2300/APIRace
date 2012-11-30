@@ -1,8 +1,9 @@
 PASS=APIRaceInstr
 LIBDIR = ../lib
+CXXFLAG = 
 FLAG=-apirace
 
-CXXFLAG=-O1 -g -Wall -fno-builtin
+CXX_OPT_FLAG=-O1 -Wall -fno-builtin
 
 cctests = $(patsubst %.cc,%.cc.bc,$(wildcard *.cc))
 
@@ -13,7 +14,7 @@ instrlls = $(patsubst %.bc,%.instr.ll,$(cctests))
 test: $(instrlls) $(exes)
 
 %.cc.bc: %.cc
-	clang++ -emit-llvm -c $< -o $@
+	clang++ $(CXXFLAG) -fPIE -emit-llvm -c $< -o $@
 
 %.instr.bc: %.bc
 	opt -load $(LIBDIR)/$(PASS).so $(FLAG) < $< > $@
@@ -22,10 +23,10 @@ test: $(instrlls) $(exes)
 	llvm-dis $<
 
 %.instr.o: %.instr.bc
-	clang++ -fPIE $(CXXFLAG) -c $<
+	clang++ $(CXXFLAG) -fPIE $(CXX_OPT_FLAG) -c $<
 
 %.instr.x: %.instr.o
-	clang++ -pie -o $@ $< -lpthread -ldl $(LIBDIR)/libtsan.a
+	clang++ $(CXXFLAG) -pie -o $@ $< -lpthread -ldl $(LIBDIR)/libtsan.a
 
 clean:
 	rm -rf *.bc *.x *.o *.ll
