@@ -17,9 +17,46 @@ class A {
     ~A() { pthread_barrier_destroy(&B); }
 
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        internal1();
+        void * retval = NULL;
+        // __tsan_entry_func()        
 
-        return NULL;
+        // 1 :: instr(abc,xyz);
+        // [1] == AllLoadedMembers
+        // [2] == AllStoredMembers
+        // [3] == MemberLoadsAndStores
+        //
+        // [1] [2] [3] empty
+        abc++;
+
+        // [1] [2] {abc} 
+        if (flag) {
+            dummy++; // Exact :: instr(dummy);
+            internal1();
+            abc++; // Exact :: instr(abc);
+            retval = &flag; // Exact :: instr(flag);
+            goto RETURN;
+            // 2 :: instr(abc); 
+            // [3] { load dummy ; load abc; load flag; store ... }
+        }
+        else {
+            xyz++; 
+            retval =  &abc;
+            goto RETURN;
+            // [1] [2] { abc, xyz }
+            // 2 :: instr( xyz, abc );
+        }
+        member++;
+        // [1] [2] { abc, xyz, member };
+        // 2 :: instr( abc, xyz, member );
+        
+    RETURN:
+        // instr ( abc, xyz, member } ===> BEGIN
+        return retval;
+
+        // instrument [3] { ... }
+        // Move member GEP just after 'this1' in 1st BB
+        // instrument entry/exit
+        //
     }
     void *__attribute__((annotate("self-write")))  Thread2(void *x) {
         internal2();
@@ -32,8 +69,6 @@ class A {
         if (flag) {
             member++;
             pthread_barrier_wait(&B);
-            xyz++;
-        } else {
             xyz++;
         }
     }

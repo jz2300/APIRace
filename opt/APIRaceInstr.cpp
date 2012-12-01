@@ -205,10 +205,10 @@ int APIRace::isSyncCall(Instruction *I) {
     static int numOfSyncCalls = sizeof(syncCallList)/sizeof(syncCallList[0]);
 
     CallInst *CI = dyn_cast<CallInst>(I);
-    if (!CI) return false;
+    if (!CI) return -1;
     Function *F = CI->getCalledFunction();
-    if (!F) return false;
-    if (!F->hasName()) return false;
+    if (!F) return -1;
+    if (!F->hasName()) return -1;
     StringRef funcName = F->getName();
     
     for (int i=0; i<numOfSyncCalls; ++i) {
