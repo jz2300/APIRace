@@ -430,14 +430,11 @@ bool APIRace::runOnFunction(Function &F) {
                                     AllLoadedMembers, AllStoredMembers );
                 }
             } else if (isa<CallInst>(BI) || isa<InvokeInst>(BI)) {
-                if ( (BBSyncCallLvl = isSyncCall(BI)) >= 0 ) {
-//                    groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
-//                                    AllLoadedMembers, AllStoredMembers );
-//                    Res |= instrumentLoadedAndStoredMemberInFunction( BI, 
-//                                    AllLoadedMembers, AllStoredMembers );
-                }
+                if ( BBSyncCallLvl < 0 )
+                    BBSyncCallLvl = isSyncCall(BI);
             }
         }
+        // if this BB has sync call, we treat all loads and stores exactly.
         if (BBSyncCallLvl >= 0) {
             selectLoadAndStoreInstructions( className, LocalLoadsAndStores,
                                      MemberLoadsAndStores);
