@@ -19,6 +19,9 @@ using namespace llvm;
 static cl::opt<bool>  ClInstrumentFuncEntryExit(
     "apirace-instrument-func-entry-exit", cl::init(true),
     cl::desc("Instrument function entry and exit"), cl::Hidden);
+static cl::opt<bool>  CLInstrumentAtMultipleReturn(
+    "apirace-insrtument-at-multiple-return", cl::init(false),
+    cl::desc("Instrument at multiple return, otherwise at the begin"), cl::Hidden);
 
 
 STATISTIC(NumInstrumentedReads, "Number of instrumented reads");
@@ -45,21 +48,26 @@ struct APIRace : public FunctionPass {
     AnnotationMap AT;  // [ FunName : Annotation ]
     bool getFuncAnnotations(Module &M);
 
-    typedef std::map<std::string, bool> FunctionSyncMap;
+    // compute lvl of sync calls
+    typedef std::map<std::string, int> FunctionSyncMap;
     FunctionSyncMap FSM;
-    bool isSyncCall(Instruction *I);
-    bool hasSyncCallInFunc(Function *F);
+    int isSyncCall(Instruction *I);
+    int hasSyncCallInFunc(Function *F);
 
     // utility for instrumentation
-    void groupAllUsedMembers( StringRef &TargetClassName,
-        SmallVectorImpl<Instruction*> &LocalGetElementPtrs, SmallSet<Value*, 8> &AllUsedMembers );
+    void groupAllMemberGEPs( StringRef &TargetClassName,
+        SmallVectorImpl<Instruction*> &LocalGetElementPtrs, std::set<Instruction*> &AllMemberGEPs );
     void groupLoadedAndStoredMembers( StringRef &TargetClassName, 
         SmallVectorImpl<Instruction*> &LocalLoadAndStores,
         std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers );
     bool instrumentLoadedAndStoredMemberInFunction( Instruction *I, 
         std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers );
     int getMemoryAccessFuncIndex(Value *Addr);
-
+    Instruction *findInstructionAfterThis1(Function &F, StringRef &TargetClassName);
+    void selectLoadAndStoreInstructions( StringRef &TargetClassName,
+        SmallVectorImpl<Instruction*> &LocalLoadAndStores,
+        SmallVectorImpl<Instruction*> &MemberLoadAndStores );
+    bool instrumentExactLoadOrStore(Instruction *I);
 
     // TSAN: original tsan rtl functions
     Function *TsanFuncEntry;
@@ -183,7 +191,7 @@ static Function *checkInterfaceFunction(Constant *FuncOrBitcast) {
  * Check whether the given CallInst calls to synchronization function, like
  * pthread_join, pthread_barrier_wait ...
  */
-bool APIRace::isSyncCall(Instruction *I) {
+int APIRace::isSyncCall(Instruction *I) {
     static const char * syncCallList[] = {
         "pthread_cancel",
         "pthread_join",
@@ -207,33 +215,37 @@ bool APIRace::isSyncCall(Instruction *I) {
         if (funcName == syncCallList[i]) {
             errs() << "isSyncCall: found a call to \'" << funcName 
                    << "\' in instruction \"" << *I << "\"\n";
-            return true;
+            return 0;
         }
     }
-
-    // check whether we cache the result
-    FunctionSyncMap::iterator it = FSM.find(F->getName());
-    if (it!=FSM.end()) return it->second;
 
     // lazy evaluation + cache
     return hasSyncCallInFunc(F);
 }
 
-bool APIRace::hasSyncCallInFunc(Function *F) {
+int APIRace::hasSyncCallInFunc(Function *F) {
     if (!F) return false;
+    
+    // check whether we cache the result
+    FunctionSyncMap::iterator it = FSM.find(F->getName());
+    if (it!=FSM.end()) return it->second;
 
+    // default not a sync -1
+    int lvl = -1, new_lvl;
     // DFS
     for (Function::iterator FI = F->begin(), FE = F->end(); FI != FE; ++FI) {
         BasicBlock &BB = *FI;
         for (BasicBlock::iterator BI = BB.begin(), BE = BB.end(); BI != BE; ++BI) {
             if (isa<CallInst>(BI)) {
-                if (isSyncCall(BI)) {
-                    return FSM[F->getName()] = true;
+                new_lvl = isSyncCall(BI) + 1;
+                if (new_lvl > 0) {
+                    if (lvl < 0 || lvl > new_lvl) lvl = new_lvl;
                 }
             } 
         }
     }
-    return FSM[F->getName()] = false;
+    
+    return FSM[F->getName()] = lvl;
 }
 
 bool APIRace::doInitialization(Module &M) {
@@ -282,22 +294,15 @@ bool APIRace::doInitialization(Module &M) {
     return true;
 }
 
-void APIRace::groupAllUsedMembers( StringRef &TargetClassName, 
-    SmallVectorImpl<Instruction*> &LocalGetElementPtrs, SmallSet<Value*, 8> &AllUsedMembers ) {
+void APIRace::groupAllMemberGEPs( StringRef &TargetClassName, 
+    SmallVectorImpl<Instruction*> &LocalGetElementPtrs, std::set<Instruction*> &AllMemberGEPs ) {
     
     for ( SmallVectorImpl<Instruction*>::reverse_iterator It = LocalGetElementPtrs.rbegin(),
         End = LocalGetElementPtrs.rend(); It != End; ++It ) {
 
-        GetElementPtrInst *GEP = cast<GetElementPtrInst>(*It);
-        Value *base = GEP->getPointerOperand();
-        Type *baseTy = base->getType();
-        StringRef className = getClassName(baseTy);
-        if (className.size() == 0) continue;
-        // FIXME: this is not working for friend function...
-        if (className != TargetClassName) continue;
-
-        AllUsedMembers.insert(GEP);
-        errs() << GEP->getName() << " : " << className << "\n"; 
+        if ( isMemberOfClass(TargetClassName, *It) ) {
+            AllMemberGEPs.insert(*It);
+        }
     }
 }
 
@@ -333,6 +338,33 @@ void APIRace::groupLoadedAndStoredMembers( StringRef &TargetClassName,
     LocalLoadAndStores.clear();
 }
 
+void APIRace::selectLoadAndStoreInstructions( StringRef &TargetClassName,
+    SmallVectorImpl<Instruction*> &LocalLoadAndStores,
+    SmallVectorImpl<Instruction*> &MemberLoadAndStores ) {
+
+    SmallSet<Value*, 8> WriteTargets;    
+    for ( SmallVectorImpl<Instruction*>::reverse_iterator It = LocalLoadAndStores.rbegin(),
+        End = LocalLoadAndStores.rend(); It != End; ++It ) {
+        
+        Instruction *I = *It;
+        if (StoreInst *SI = dyn_cast<StoreInst>(I)) {
+            Value *PointerOperand = SI->getPointerOperand();
+            if ( !isMemberOfClass( TargetClassName, PointerOperand ) ) continue;
+            WriteTargets.insert(PointerOperand);
+        } else {
+            LoadInst *LI = cast<LoadInst>(I);
+            Value *PointerOperand = LI->getPointerOperand();
+            if ( !isMemberOfClass( TargetClassName, PointerOperand ) ) continue;
+            if (WriteTargets.count(PointerOperand)) {
+                NumOmittedReadsBeforeWrite++;
+                continue;
+            }
+        }
+        MemberLoadAndStores.push_back(I);
+    }
+    LocalLoadAndStores.clear();
+}
+
 bool APIRace::runOnFunction(Function &F) {
     if (!TD) return false;
 
@@ -351,9 +383,6 @@ bool APIRace::runOnFunction(Function &F) {
         //return false;
     }
 
-    errs() << ">>>>>> Start Function " << F.getName() << " <<<<<<\n";
-    errs() << "# Annotation : " << ( (ann == AT.end()) ? "NONE" : ann->second )<< '\n';
-    errs() << "# Class Name : " << className <<'\n';  
 
     // Traverse all instructions in this function:
     // (1) collect loads/stores/returns, involving a class member
@@ -363,39 +392,85 @@ bool APIRace::runOnFunction(Function &F) {
 
     SmallVector<Instruction*, 8> RetVec;
     SmallVector<Instruction*, 8> LocalLoadsAndStores;
+    SmallVector<Instruction*, 8> MemberLoadsAndStores;
     std::set<Value*> AllLoadedMembers, AllStoredMembers;
+    std::set<Instruction*> AllMemberGEPs;
     bool Res = false;
-    bool HasSyncCall = false;
-    Instruction *LastI = NULL;
+    int SyncCallLvl = hasSyncCallInFunc(&F);
+
+    errs() << ">>>>>> Start Function " << F.getName() << " <<<<<<\n";
+    errs() << "# Annotation : " << ( (ann == AT.end()) ? "NONE" : ann->second )<< '\n';
+    errs() << "# Class Name : " << className <<'\n';  
+    errs() << "# Sync Level : " << SyncCallLvl << '\n';
 
     for (Function::iterator FI = F.begin(), FE = F.end(); FI != FE; ++FI) {
         BasicBlock &BB = *FI;
+        int BBSyncCallLvl = -1;
+
         for (BasicBlock::iterator BI = BB.begin(), BE = BB.end(); BI != BE; ++BI) {
-            LastI = BI;
+            //errs() << *BI << '\n';
             if (isa<LoadInst>(BI) || isa<StoreInst>(BI)) {
                 LocalLoadsAndStores.push_back(BI); 
+            } else if (isa<GetElementPtrInst>(BI)) {
+                if ( isMemberOfClass( className, BI ) ) {
+                    // collect all member GEPs
+                    AllMemberGEPs.insert(BI);
+                }
             } else if (isa<ReturnInst>(BI)) {
                 RetVec.push_back(BI);
+                if (CLInstrumentAtMultipleReturn) {
+                    //FIXME : the following is NOT working, because clang treat return 
+                    // as (1) set retval and (2) jump to RETURN.
+                    // i.e. only one ret exists in a function!!!
+                    if (BBSyncCallLvl < 0) {  // if no sync in this BB
+                        groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
+                                    AllLoadedMembers, AllStoredMembers );
+                    }
+                    Res |= instrumentLoadedAndStoredMemberInFunction( BI,
+                                    AllLoadedMembers, AllStoredMembers );
+                }
             } else if (isa<CallInst>(BI) || isa<InvokeInst>(BI)) {
-                if ( (HasSyncCall = isSyncCall(BI)) ) {
-                    FSM[F.getName()] = true;
-                    groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
-                                    AllLoadedMembers, AllStoredMembers );
-                    Res |= instrumentLoadedAndStoredMemberInFunction( LastI, 
-                                    AllLoadedMembers, AllStoredMembers );
+                if ( (BBSyncCallLvl = isSyncCall(BI)) >= 0 ) {
+//                    groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
+//                                    AllLoadedMembers, AllStoredMembers );
+//                    Res |= instrumentLoadedAndStoredMemberInFunction( BI, 
+//                                    AllLoadedMembers, AllStoredMembers );
                 }
             }
         }
-        groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
-                                    AllLoadedMembers, AllStoredMembers );
+        if (BBSyncCallLvl >= 0) {
+            selectLoadAndStoreInstructions( className, LocalLoadsAndStores,
+                                     MemberLoadsAndStores);
+        } else {
+            groupLoadedAndStoredMembers( className, LocalLoadsAndStores,
+                                   AllLoadedMembers, AllStoredMembers );
+        }
+    }
+    
+    // Instrument those needed to be exact location
+    for (size_t i=0, n=MemberLoadsAndStores.size(); i<n; ++i) {
+        Res |= instrumentExactLoadOrStore(MemberLoadsAndStores[i]);
     }
 
-    Res |= instrumentLoadedAndStoredMemberInFunction( LastI, 
-                                    AllLoadedMembers, AllStoredMembers );
+    // Move all GEPs for used member just after 'this1'
+    if (AllMemberGEPs.size() > 0) {
+        Instruction *MovePos = findInstructionAfterThis1(F, className);
+        if (MovePos == NULL) {
+            errs() << "Cannot location \'this\' for GEP! BUG!!!!!!!!!!!!!!!!! \n";
+        }
+        for (std::set<Instruction*>::reverse_iterator It = AllMemberGEPs.rbegin(),
+            End = AllMemberGEPs.rend(); It != End; ++It) {
+            (*It)->moveBefore(MovePos);
+        }
+        if (!CLInstrumentAtMultipleReturn) {
+            Res |= instrumentLoadedAndStoredMemberInFunction( MovePos,
+                                AllLoadedMembers, AllStoredMembers );
+        }
+        //errs() << '\n' << F << '\n';
+    }
 
     // Instrument function entry/exit
-    HasSyncCall = true;
-    if ((Res || HasSyncCall) && ClInstrumentFuncEntryExit) {
+    if ((Res || SyncCallLvl ) && ClInstrumentFuncEntryExit) {
         IRBuilder<> IRB(F.getEntryBlock().getFirstNonPHI());
         Value *ReturnAddress = IRB.CreateCall(
             Intrinsic::getDeclaration(F.getParent(), Intrinsic::returnaddress),
@@ -412,6 +487,26 @@ bool APIRace::runOnFunction(Function &F) {
     return Res;
 }
 
+Instruction *APIRace::findInstructionAfterThis1(Function &F, StringRef &TargetClassName) {
+    BasicBlock &EntryBlock = F.getEntryBlock();
+    BasicBlock::iterator BI, BE;
+    for (BI = EntryBlock.begin(), BE = EntryBlock.end();
+        BI != BE; ++BI ) {
+        if (isa<LoadInst>(BI)) {
+            if (BI->getName() == "this1") break;
+        }
+    }
+    // If not found "this1", something wrong!!!
+    if (BI == BE) return NULL;
+    // skip member GEPs
+    while ( ++BI != BE && isMemberOfClass(TargetClassName, BI) );
+    if (BI!=BE) return BI;
+    // reaching end of entry BB, get first Instruction of 2nd BB
+    Function::iterator FI = F.begin();
+    FI++;
+    return FI->getFirstNonPHI();
+}
+
 bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *I, 
     std::set<Value*> &AllLoadedMembers, std::set<Value*> &AllStoredMembers ) {
 
@@ -425,11 +520,11 @@ bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *I,
 
         int Idx = getMemoryAccessFuncIndex(LoadedMember);
         if (Idx < 0) continue;
+        errs() << "# INSTR Load : " << LoadedMember->getName() << "\n";
         IRB.CreateCall(TsanRead[Idx], IRB.CreatePointerCast(LoadedMember, 
                                                     IRB.getInt8PtrTy()));
         NumInstrumentedReads++;
         Res |= true;
-        errs() << "# INSTR Load : " << LoadedMember->getName() << "\n";
     }
 
     for (std::set<Value*>::reverse_iterator It = AllStoredMembers.rbegin(),
@@ -438,16 +533,29 @@ bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *I,
         Value *StoredMember = *It;
         int Idx = getMemoryAccessFuncIndex(StoredMember);
         if (Idx < 0) continue;
+        errs() << "# INSTR Store : " << StoredMember->getName() << "\n";
         IRB.CreateCall(TsanWrite[Idx], IRB.CreatePointerCast(StoredMember, 
                                                     IRB.getInt8PtrTy()));
         NumInstrumentedWrites++;
         Res |= true;
-        errs() << "# INSTR Store : " << StoredMember->getName() << "\n";
     }
-    AllLoadedMembers.clear();
-    AllStoredMembers.clear();
 
     return Res;
+}
+
+bool APIRace::instrumentExactLoadOrStore(Instruction *I) {
+    IRBuilder<> IRB(I);
+    bool IsWrite = isa<StoreInst>(*I);
+    Value *Addr = IsWrite
+        ? cast<StoreInst>(I)->getPointerOperand()
+        : cast<LoadInst>(I)->getPointerOperand();
+    int Idx = getMemoryAccessFuncIndex(Addr);
+    if (Idx < 0) return false;
+    Value *OnAccessFunc = IsWrite ? TsanWrite[Idx] : TsanRead[Idx];
+    IRB.CreateCall(OnAccessFunc, IRB.CreatePointerCast(Addr, IRB.getInt8PtrTy()));
+    if (IsWrite) NumInstrumentedWrites++;
+    else         NumInstrumentedReads++;
+    return true;
 }
 
 int APIRace::getMemoryAccessFuncIndex(Value *Addr) {

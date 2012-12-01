@@ -14,7 +14,7 @@ instrlls = $(patsubst %.bc,%.instr.ll,$(cctests))
 test: $(instrlls) $(exes)
 
 %.cc.bc: %.cc
-	clang++ $(CXXFLAG) -fPIE -emit-llvm -c $< -o $@
+	clang++ -O0 -fPIE -emit-llvm -c $< -o $@
 
 %.instr.bc: %.bc
 	opt -load $(LIBDIR)/$(PASS).so $(FLAG) < $< > $@
