@@ -4,9 +4,9 @@ API RACE DETECTOR
 (1) Install gcc 4.6.3 or above 
 (2) Compile llvm and clang, by,
 
-svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
-cd llvm
 R=167525
+svn co -r $R http://llvm.org/svn/llvm-project/llvm/trunk llvm
+cd llvm
 (cd tools && svn co -r $R http://llvm.org/svn/llvm-project/cfe/trunk clang)
 (cd projects && svn co -r $R http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt)
 mkdir build
@@ -15,4 +15,3 @@ mkdir build
 (3) Compile the API Race, by make
 -------------------------------------------------------------
 
-ok
