@@ -1,0 +1,11 @@
+>>>>>>>>>>>> pbzip2 1.1.6 <<<<<<<<<<<
+0. The code has a bug (use before initialization), which causes segmentation fault.
+The patch is provided in patch/ .
+1. tsan detected a data-race (although the code is correct)
+    producer:2697: WRITE NumBlocks
+    fileWriter:1836: READ NumBlocks
+2. apirace do not detect as 'NumBlocks' is not class member.
+--------------------------------------
+
+
+

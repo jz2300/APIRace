@@ -3,7 +3,7 @@ LIBDIR = ../lib
 CXXFLAG = 
 FLAG=-apirace
 
-CXX_OPT_FLAG=-O1 -Wall -fno-builtin
+CXX_OPT_FLAG=-O2 -Wall -fno-builtin -fno-inline-functions
 
 cctests = $(patsubst %.cc,%.cc.bc,$(wildcard *.cc))
 
@@ -14,7 +14,7 @@ instrlls = $(patsubst %.bc,%.instr.ll,$(cctests))
 test: $(instrlls) $(exes)
 
 %.cc.bc: %.cc
-	clang++ -O0 -fPIE -emit-llvm -c $< -o $@
+	clang++ $(CXX_OPT_FLAG) -emit-llvm -c $< -o $@
 
 %.instr.bc: %.bc
 	opt -load $(LIBDIR)/$(PASS).so $(FLAG) < $< > $@

@@ -1,0 +1,11 @@
+--- pbzip2.cpp.old	2012-12-06 01:24:51.953519602 -0500
++++ pbzip2.cpp	2012-12-06 01:25:23.266521043 -0500
+@@ -2722,7 +2722,7 @@
+ {
+ 	queue *fifo;
+ 	// char *FileData = NULL;
+-	outBuff *fileData;
++	outBuff *fileData = NULL;
+ 	char *CompressedData = NULL;
+ 	// unsigned int inSize = 0;
+ 	unsigned int outSize = 0;
