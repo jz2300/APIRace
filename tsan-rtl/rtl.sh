@@ -9,6 +9,10 @@ svn co -r $R http://llvm.org/svn/llvm-project/compiler-rt/trunk compiler-rt
 #replace the '-Werror', which causes compilation error
 sed -i 's/-Werror/-Wall/g' ./compiler-rt/lib/tsan/rtl/Makefile.old 
 
+#apply patch to rtl
+cp *.patch compiler-rt/lib/tsan/rtl
+(cd compiler-rt/lib/tsan/rtl && patch -p0 < *.patch)
+
 #make
 (cd compiler-rt/lib/tsan && make -f Makefile.old libtsan CXX=clang++)
 

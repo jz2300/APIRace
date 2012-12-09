@@ -16,7 +16,20 @@ mkdir build
 -------------------------------------------------------------
 
 
-167525: fPIE segmentation fault
-
 llvm 169461
 clang 169462
+
+
+BUG1207a:
+<example>
+    for (int i=....) {
+        a[i] = ... ;  // a is a member
+
+    }
+
+    GEP of a[i] is dependent on i, which has a local scope smaller than function scope.
+    when inserting GEP before return, i is not defined!!!
+<solution>
+
+ADD sh wrapper
+
