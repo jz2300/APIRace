@@ -12,3 +12,8 @@ barrier-race.cc                             W-W Race            PASS
 cond-no-race.cc                             NO Race             PASS
 cond-race.cc                                W-W Race            PASS
 
+C++ Grammar check:
+
+cpp-grammar1.cc         OK              instr: val,  a.val
+cpp-grammar2.cc         OK              instr: a.val,  b.val
+cpp-grammar3.cc         OK              instr: abc, a.val  

@@ -3,14 +3,13 @@ SHELL = /bin/sh
 
 # Compiler to use
 CC = g++
-CFLAGS = -O2
+CFLAGS = -O1 
 #CFLAGS += -g -Wall
 #CFLAGS += -ansi
 #CFLAGS += -pedantic
 #CFLAGS += -std=c++0x
 
 APIRACE_CFLAGS = -fPIE -fno-builtin
-APIRACE_NOINLINE = -fno-inline-funtions 
 APIRACE_LDFLAGS = -lpthread -ldl ../../lib/libtsan.a
 
 # Comment out CFLAGS line below for compatability mode for 32bit file sizes
@@ -47,7 +46,7 @@ LDFLAGS += -lpthread
 # Where you want pbzip2 installed when you do 'make install'
 PREFIX = /usr
 
-all: clean pbzip2.api.bc pbzip2.apirace.x
+all: clean pbzip2.apirace.x
 
 %.cpp.bc: %.cpp
 	clang++ $(CFLAGS) $(APIRACE_CFLAGS) -emit-llvm -c $< -o $@
@@ -55,12 +54,11 @@ all: clean pbzip2.api.bc pbzip2.apirace.x
 %.api.bc: %.cpp.bc
 	opt -load ../../lib/APIRaceInstr.so -apirace < $< > $@
 
-%.api.o: %.api.bc
-	clang++  $(CFLAGS) $(APIRACE_CFLAGS) -c $< -o $@
-#	llvm-dis $< -o $*.api.ll
+%.api.o: %.cpp
+	../../bin/clang-apirace.sh $(CFLAGS) -c $< -o $@
 
 pbzip2.apirace.x: pbzip2.api.o BZ2StreamScanner.api.o ErrorContext.api.o
-	clang++ $(CFLAGS) $(APIRACE_CFLAGS) -pie -o $@ $^ $(LDFLAGS) $(APIRACE_LDFLAGS)
+	../../bin/clang-apirace.sh $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Standard pbzip2 compile
 #pbzip2: pbzip2.cpp BZ2StreamScanner.cpp ErrorContext.cpp
@@ -83,4 +81,4 @@ install: pbzip2
 	chmod a+r $(PREFIX)/man/man1/pbzip2.1
 
 clean:
-	rm -f *.api.o pbzip2.apirace.x *.bc *.api.ll
+	rm -f *.api.o pbzip2.apirace.x *.bc *.api.ll *.api.stat

@@ -20,7 +20,7 @@ llvm 169461
 clang 169462
 
 
-BUG1207a:
+>>>BUG1207a:
 <example>
     for (int i=....) {
         a[i] = ... ;  // a is a member
@@ -31,5 +31,24 @@ BUG1207a:
     when inserting GEP before return, i is not defined!!!
 <solution>
 
-ADD sh wrapper
+>>>ADD sh wrapper
+
+>>>firefox
+(1) .mozconfig: set
+    CC=clang
+    CXX=clang++
+
+(2) make -f config.mk configure
+(3) cd /obj-dir****
+(4) ./config/autoconf.mk
+    ./js/src/config/autoconf.mk
+
+change CXX and HOST_CXX =/home/jing/src/APIRace/bin/clang-apirace.sh
+
+(5) /obj-dir***/memory/mozalloc/Makefile 
+
+add CXX and HOST_CXX = clang++
+
+(6) make -j 10
+
 

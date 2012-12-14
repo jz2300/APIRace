@@ -5,25 +5,30 @@
 CXX="/usr/local/bin/clang++"
 OPT="/usr/local/bin/opt"
 APIRACE_SO="$HOME/src/APIRace/lib/APIRaceInstr.so"
-APIRACE_LIB="-lpthread -ldl $HOME/src/APIRace/lib/libtsan.a"
-CXX_APIRACE_FLAGS="-fPIE -fno-builtin -Wall -fno-inline-functions"
-# -D__STDC_LIMIT_MACROS
-CXX_FLAGS="-D__STDC_LIMIT_MACROS -DMOZ_WIDGET_GTK2"
+APIRACE_LIB="-lpthread -ldl $HOME/src/APIRace/lib/libtsan-mod.a"
+
+CXX_APIRACE_FLAGS="-fPIE -Wall -fno-builtin" ###-Wall -fno-inline-functions"
+CXX_OUTPUT_FLAGS="-pie"
 ISOBJ="false"
 OUTPUT=""
 INPUT=""
+
 VERBOSE="true"
 SHOWSTAT="true"
 REDIRECT="/dev/null"
+DOINSTR="true"
+OPTIMIZE=""
+
+LINE="$@"
 
 while [ $# -gt 0 ]; do
     case "$1" in
-    -v)
-        VERBOSE="true"
+    -O0)
+        OPTIMIZE="-O0"
         shift
         ;;
-    -vv)
-        SHOWSTAT="true"
+    -Os|O2|O3|O4)
+        OPTIMIZE="-O1"
         shift
         ;;
     -c) 
@@ -54,25 +59,44 @@ done
 
 NFILES=`echo "$INPUT" | wc -w`
 
+if [ "$DOINSTR" = "false" ]; then
+    CXX_APIRACE_FLAGS=""
+    CXX_OUTPUT_FLAGS=""
+    APIRACE_LIB=""
+fi
+
+if [ -z "$OPTIMIZE" ]; then
+    OPTIMIZE="-O1"
+fi
+CXX_FLAGS="$OPTIMIZE $CXX_FLAGS"
+
 if [ "$ISOBJ" = "true" -a "$NFILES" = "1" ]; then
     if [ -z "$OUTPUT" ]; then
-        OUTPUT=`echo $INPUT | sed 's/\(.*\.\)cpp\|cc\|C/\1o/'`
+        OUTPUT=`echo $INPUT | sed 's/\(.*\.\)\(cc\|cpp\|C\)/\1o/'`
     fi
     if [ "$SHOWSTAT" = "true" ]; then
-        REDIRECT=`echo $INPUT | sed 's/\(.*\.\)cpp\|cc\|C/\1stat/'`
+        REDIRECT=`echo $INPUT | sed 's/\(.*\.\)\(cc\|cpp\|C\)/\1api\.stat/'`
     fi
 
     CMD="$CXX $CXX_APIRACE_FLAGS $CXX_FLAGS -emit-llvm -c $INPUT -o $INPUT.bc"
     if [ "$VERBOSE" = "true" ]; then
-        echo "EXEC: $CMD"
+        echo "EXEC: $CMD "
     fi
     $CMD
 
-    CMD="$OPT -load=$APIRACE_SO -apirace $INPUT.bc -o $INPUT.instr.bc"
-    if [ "$VERBOSE" = "true" ]; then
-        echo "EXEC: $CMD > $REDIRECT 2 > & 1"
+    if [ "$DOINSTR" = "true" ]; then
+        CMD="$OPT -load=$APIRACE_SO -apirace $INPUT.bc -o $INPUT.instr.bc"
+        if [ "$VERBOSE" = "true" ]; then
+            echo "EXEC: $CMD > $REDIRECT 2 > & 1"
+        fi
+        $CMD > $REDIRECT 2>&1
+    else 
+        CMD="mv $INPUT.bc $INPUT.instr.bc"
+        if [ "$VERBOSE" = "true" ]; then
+            echo "EXEC: $CMD "
+        fi
+        $CMD
     fi
-    $CMD > $REDIRECT 2>&1
 
     CMD="$CXX $CXX_APIRACE_FLAGS $CXX_FLAGS -c $INPUT.instr.bc -o $OUTPUT"
     if [ "$VERBOSE" = "true" ]; then
@@ -80,22 +104,16 @@ if [ "$ISOBJ" = "true" -a "$NFILES" = "1" ]; then
     fi
     $CMD
 
-elif [ "$ISOBJ" = "false" -a -n "$OUTPUT" ]; then
-
-    CMD="$CXX $CXX_APIRACE_FLAGS -pie $CXX_FLAGS $INPUT -o $OUTPUT $APIRACE_LIB"
+elif [ -n "$OUTPUT" ]; then 
+    CMD="$CXX $CXX_APIRACE_FLAGS $CXX_OUTPUT_FLAGS $CXX_FLAGS $INPUT $APIRACE_LIB -o $OUTPUT"
     if [ "$VERBOSE" = "true" ]; then
         echo "EXEC: $CMD"
     fi
     $CMD
-
 else 
-    
-    echo "wrong call to clang-apirace.sh !!!!!!!!!!!!!!"
-    echo "INPUT = $INPUT"
-    echo "OUTPUT = $OUTPUT"
-    echo "CFLAGS = $CXX_FLAGS"
-    echo "ISOBJ = $ISOBJ"
-    return 1
+    CMD="$CXX $LINE"
+    ##echo "EXEC: $CMD"
+    $CMD
 fi
 
 

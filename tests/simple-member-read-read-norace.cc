@@ -1,21 +1,21 @@
 #include <pthread.h>
+#include <cstdio>
 
 void * call_back1(void* A_ptr);
 void * call_back2(void* A_ptr);
 
 class A {
-    char dummy;
     int member;
-    double xyz;
+    int res1, res2;
 
   public:
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        int aaa = member;
-        return NULL;
+        res1 = member;
+        return this;
     }
-    void *__attribute__((annotate("self-write")))  Thread2(void *x) {
-        xyz = member;
-        return NULL;
+    void * __attribute__((annotate("self-write")))  Thread2(void *x) {
+        res2 = member;
+        return this;
     }
 
     friend void* call_back1(void* A_ptr);
@@ -30,13 +30,11 @@ class A {
 };
 
 void * call_back1(void* A_ptr) {
-    static_cast<A*>(A_ptr)->Thread1(NULL);
-    return NULL;
+    return static_cast<A*>(A_ptr)->Thread1(NULL);
 }
 
 void * call_back2(void* A_ptr) {
-    static_cast<A*>(A_ptr)->Thread2(NULL);
-    return NULL;
+    return static_cast<A*>(A_ptr)->Thread2(NULL);
 }
 
 int main() {

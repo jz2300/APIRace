@@ -13,19 +13,17 @@ class A {
   public:
     A() : flag(1), flag2(0) {}
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        return NULL;
         if (flag) {
             member1++;
             return NULL;
-        } else if (flag2) {
-            return NULL;
-        }
+        }             
+        member1++;
         member2++;
         return NULL;
     }
     void *__attribute__((annotate("self-write")))  Thread2(void *x) {
         if (flag) {
-            //member2++;
+            member2++;
             return NULL;
         }
         member1=1;

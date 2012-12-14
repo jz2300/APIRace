@@ -21,4 +21,6 @@ pbzip2-tsan: pbzip2-1.1.6
 pbzip2-clean:
 	$(MAKE) -C pbzip2-1.1.6 -f Makefile.pbzip2.apirace clean
 	$(MAKE) -C pbzip2-1.1.6 -f Makefile.pbzip2.tsan clean
+	rm -f pbzip2-1.1.6/Makefile.pbzip2.apirace pbzip2-1.1.6/Makefile.pbzip2.tsan
 
+clean: pbzip2-clean

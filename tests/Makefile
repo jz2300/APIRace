@@ -1,39 +1,31 @@
 PASS=APIRaceInstr
 LIBDIR = ../lib
-CXXFLAG = 
+CXXFLAG =
 FLAG=-apirace
 
-CXX_OPT_FLAG=-O0 -g -Wall -fno-builtin -fno-inline-functions
+CXXFLAGS=-Wall -fPIE -fno-builtin 
+#OPTFLAGS=-O2 -fno-inline-functions
+OPTFLAGS=-O1 
+RTL=-lpthread -ldl /home/jing/src/APIRace/lib/libtsan.a
+RTLMOD=-lpthread -ldl /home/jing/src/APIRace/lib/libtsan-mod.a
 
-cctests = $(patsubst %.cc,%.bc,$(wildcard *.cc))
+tasks = $(patsubst %.cc,%.task,$(wildcard *.cc))
 
-exes = $(patsubst %.bc,%.instr.x,$(cctests))
+all: $(tasks)
 
-instrlls = $(patsubst %.bc,%.instr.ll,$(cctests))
-
-test: $(exes) 
-####$(instrlls)
-
-%.cc.bc: %.cc
-	clang++ $(CXX_OPT_FLAG) -emit-llvm -c $< -o $@
-
-%.instr.bc: %.cc.bc
-	opt -load $(LIBDIR)/$(PASS).so $(FLAG) < $< > $@
-
-%.instr.ll: %.instr.bc
-	llvm-dis $<
-
-#%.instr.o: %.instr.bc
-#	clang++ $(CXXFLAG) -fPIE $(CXX_OPT_FLAG) -c $<
-
-#%.instr.x: %.instr.o
-#	clang++ $(CXXFLAG) -pie -o $@ $< -lpthread -ldl $(LIBDIR)/libtsan.a
-
-%.o: %.cc
-	../bin/clang-apirace.sh $(CXXFLAG) $(CXX_OPT_FLAG) -c $<
-
-%.instr.x: %.o
-	../bin/clang-apirace.sh $(CXXFLAG) $(CXX_OPT_FLAG) -o $@ $< -lpthread -ldl $(LIBDIR)/libtsan.a
+%.task: %.cc
+	clang++ $(CXXFLAGS) $(OPTFLAGS) -pie $< -o $*.x -lpthread
+	../bin/clang-apirace.sh $(OPTFLAGS) -c $<
+	../bin/clang-apirace.sh $(OPTFLAGS) $*.o -o $*.api.x
+	clang++ $(CXXFLAGS) $(OPTFLAGS) -emit-llvm -c $*.cc.instr.bc -o $*.cc.instr.o1.bc
+	llvm-dis $*.cc.instr.bc
+	llvm-dis $*.cc.instr.o1.bc
+	clang++ -fsanitize=thread $(CXXFLAGS) $(OPTFLAGS) -c $< -emit-llvm -o $*.cc.tsan.bc
+	clang++ $(CXXFLAGS) $(OPTFLAGS) -emit-llvm -c $*.cc.tsan.bc -o $*.cc.tsan.o1.bc
+	llvm-dis $*.cc.tsan.bc
+	llvm-dis $*.cc.tsan.o1.bc
+	clang++ -pie $(CXXFLAGS) $(OPTFLAGS) $*.cc.tsan.bc -o $*.tsan.x $(RTL)
+	clang++ -pie $(CXXFLAGS) $(OPTFLAGS) $*.cc.tsan.bc -o $*.tsan.mod.x $(RTLMOD)
 
 clean:
-	rm -rf *.bc *.x *.o *.ll *.stat
+	rm -rf *.x *.bc *.ll *.o *.stat

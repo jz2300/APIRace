@@ -3,13 +3,13 @@ SHELL = /bin/sh
 
 # Compiler to use
 CC = g++
-CFLAGS = -O0
+CFLAGS = -O1
 #CFLAGS += -g -Wall
 #CFLAGS += -ansi
 #CFLAGS += -pedantic
 #CFLAGS += -std=c++0x
 
-TSAN_FLAGS = -fno-builtin -fPIE -fsanitize=thread #-fno-inline-functions
+TSAN_FLAGS = -fno-builtin -fPIE -fsanitize=thread 
 TSAN_LDFLAGS = #-lpthread -ldl ../../lib/libtsan.a
 
 # Comment out CFLAGS line below for compatability mode for 32bit file sizes
@@ -22,7 +22,7 @@ CFLAGS += -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
 #CFLAGS += -DPBZIP_NO_LOADAVG
 
 # Uncomment CFLAGS line below to get debug output
-CFLAGS += -DPBZIP_DEBUG
+#CFLAGS += -DPBZIP_DEBUG
 
 # Comment out CFLAGS line below to disable pthread semantics in code
 CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
@@ -58,11 +58,14 @@ all: clean pbzip2.tsan.x
 %.tsan.o: %.tsan.s
 	clang++ $(CFLAGS) $(TSAN_FLAGS) -c $< -o $@
 
-#pbzip2.tsan.x: pbzip2.tsan.o BZ2StreamScanner.tsan.o ErrorContext.tsan.o
-#	clang++ $(CFLAGS) $(TSAN_FLAGS) -pie -o $@ $^ $(LDFLAGS) $(TSAN_LDFLAGS) 
-
-pbzip2.tsan.x: pbzip2.cpp BZ2StreamScanner.cpp ErrorContext.cpp
+pbzip2.tsan2.x: pbzip2.cpp BZ2StreamScanner.cpp ErrorContext.cpp
 	clang++ $(TSAN_FLAGS) $(CFLAGS) -pie -o $@ $^ $(LDFLAGS) $(TSAN_LDFLAGS)
+
+%.tsan.o: %.cpp
+	../../bin/clang-tsan.sh $(CFLAGS) -c $< -o $@
+
+pbzip2.tsan.x: pbzip2.tsan.o BZ2StreamScanner.tsan.o ErrorContext.tsan.o
+	../../bin/clang-tsan.sh $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Standard pbzip2 compile
 #pbzip2: pbzip2.cpp BZ2StreamScanner.cpp ErrorContext.cpp
