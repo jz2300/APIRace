@@ -1,0 +1,32 @@
+heap-use-after-free 1 / 39 / 38
+data race  22 / 17 / 14
+
+TSAN          :SZ: API RACE Exact : API NO Exact   :  REASON
+------------------------------------------------------------------------------------------
+              : 1: 0x7d1300033330 : 0x7d1300033330 : FP, use lock in gkStreamer::start() to protect m_stop.
+0x7d1300033398: 1: 0x7d1300033398 : 0x7d1300033398 : data race on m_wantsQSync.
+0x7d1300033338: 4: 0x7d1300033338 : 0x7d1300033338 : data race on m_size
+0x7d1300033340: 8: 0x7d1300033340 : 0x7d1300033340 : imcomplete trace back, consider as data race 
+              : 1: 0x7d0a00031564 : 0x7d0a00031564 : data race on m_isInit
+0x7d0300163140: 8:                :                : data race on m_data
+0x7d0a000318d4: 1: 0x7d0a000315d4 : 0x7d0a000315d4 : data race on m_isInit
+0x7d0a00031564: 1:                :                : unsure 
+0x7d0a000315f8: 8: 0x7d0a000315f8 : 0x7d0a000315f8 : data race on m_playback
+0x7d0a000314b1: 1: 0x7d0a00031561 :                : data race on m_ok 
+0x7d0a00031480: 4:                :                : unsure 
+0x7d0a000313e8: 8: 0x7d0a00031548 : 0x7d0a00031548 : data race on my_stream
+              : 1:                : 0x7d0a00031567 : data race on m_do3D
+              : 1: 0x7d0a00031567 :                : data race on m_do3D  
+0x7d0a00031474: 1: 0x7d0a000315d4 :                : imcomplete trace back, consider as data race
+0x7d0a000313f0: 4:                :                : data race on m_fmt
+0x7d0a00031478: 4:                :                : data race on m_smp
+0x7d0a00031338: 8: 0x7d0a000313e8 : 0x7d0a00031498 : data race on m_stream
+0x7d0a00031314: 1: 0x7d0a00031524 :                : unsure
+0x7d1300033399: 1: 0x7d1300033399 : 0x7d1300033399 : data race on m_wantsSQSync
+0x7d0a00030fd0: 4:                :                : unsure 
+0x7d1300033380: 4: 0x7d1300033380 : 0x7d1300033380 : data race on m_size
+0x7d03000c6380: 8: 0x7d1300033388 : 0x7d1300033388 : data race on m_data
+0x7d1300033331: 1: 0x7d1300033331 : 0x7d1300033331 : data race on m_finish (or m_stop), imcomplete trace
+0x7d1300033350: 4: 0x7d1300033350 :                : data race on m_size
+0x7d1300033330: 1:                :                : data race on m_finish
+

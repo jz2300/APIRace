@@ -4,16 +4,31 @@ void * call_back1(void* A_ptr);
 void * call_back2(void* A_ptr);
 
 class A {
-    int dummy;
-    int member ;
+    char flag;
+    char flag2;
+    int mem[10];
+    int member;
+    double xyz;
 
   public:
+    A() : flag(1), flag2(0) {}
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
-        dummy = member;
+        if (flag) {
+            mem[9]++;
+        } else if (flag2) {
+            return NULL;
+        }
+        member++;
         return NULL;
     }
     void *__attribute__((annotate("self-write")))  Thread2(void *x) {
-        member=1;
+        if (flag) {
+            for (int i=0; i<10; ++i) {
+                mem[i] ++;
+            }
+            return NULL;
+        }
+        member=xyz;
         return NULL;
     }
 

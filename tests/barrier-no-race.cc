@@ -16,9 +16,9 @@ class A {
     void * __attribute__((annotate("self-write"))) Thread1(void *x) {
         member++;
         pthread_barrier_wait(&B);
-        xyz++;
+        dummy = xyz;
         pthread_barrier_wait(&B);
-        member--;
+        //member--;
         return NULL;
     }
     void *__attribute__((annotate("self-write")))  Thread2(void *x) {

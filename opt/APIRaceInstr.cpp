@@ -1,3 +1,8 @@
+/**
+ * this is the code of APIRace project, for Reliable Software 2012. 
+ * author: Jing Zhang, jz2300@columbia.edu
+ */
+
 #define DEBUG_TYPE "apirace"
 #include "llvm/Pass.h"
 #include "llvm/Function.h"
@@ -16,7 +21,6 @@
 #include <map>
 using namespace llvm;
 
-
 static cl::opt<bool>  ClDisableAll(
     "apirace-disable-all-instruments", cl::init(false),
     cl::desc("Do NO instrument"), cl::Hidden);
@@ -26,6 +30,9 @@ static cl::opt<bool>  ClInstrumentFuncEntryExit(
 static cl::opt<bool>  ClInstrumentMemberLoadAndStore(
     "apirace-instrument-member-load-and-store", cl::init(true),
     cl::desc("Instrument loads and stores of class members"), cl::Hidden);
+static cl::opt<bool> ClInsertTempStoreExact(
+    "apirace-insert-temp-store-exactly", cl::init(false),
+    cl::desc("Insert storeInst of Temp exactly before load/store"), cl::Hidden);
 static cl::opt<bool> ClDebugVerbose(
     "apirace-debug-verbose", cl::init(true),
     cl::desc("show verbose debug info"), cl::Hidden);
@@ -39,16 +46,25 @@ static cl::opt<bool> ClShowStatistic(
 
 STATISTIC(NumInstrumentedReads, "Number of instrumented reads");
 STATISTIC(NumInstrumentedWrites, "Number of instrumented writes");
-STATISTIC(NumInstrumentedReadsExact, "Number of instrumented reads at exact postion");
-STATISTIC(NumInstrumentedWritesExact, "Number of instrumented writes at exact position");
-
 STATISTIC(NumOmittedReadsBeforeWrite,
           "Number of reads ignored due to following writes");
 STATISTIC(NumAccessesWithBadSize, "Number of accesses with bad size");
-
-///STATISTIC(NumInstrBBExact, "Number of Basic Blocks instrumented exactly");
 STATISTIC(NumOmittedTemps, "Number of temp reduced due to duplicated members");
+STATISTIC(NumSyncCalls, "Number of synchronization calls");
+STATISTIC(NumSyncCallsTreated, "Number of synchronization calls treated");
+STATISTIC(NumInstrumentedReadsExact, "Number of instrumented reads at exact postion");
+STATISTIC(NumInstrumentedWritesExact, "Number of instrumented writes at exact position");
 
+// auxiliary functions
+static int checkSizeValidity(unsigned size);
+static StringRef getClassName(Type *PT);
+static Type* getClassTypeOfMemberFunc(Function &F);
+static bool isMemberOfClass( StringRef &TargetClassName, Value *Member );
+static bool isMemberOfAnyClass( Value *Member );
+static Function *checkInterfaceFunction(Constant *FuncOrBitcast);
+static int selectGEP( GetElementPtrInst *GEP );
+
+// declaration of APIRace Pass
 namespace {
 
 struct APIRace : public FunctionPass {
@@ -83,6 +99,7 @@ struct APIRace : public FunctionPass {
     MemberGEPToTempMap::iterator findDuplicateGEP( GetElementPtrInst* GEP,
         MemberGEPToTempMap &UniqueMemberGEPs );
     void nullAllTemps( Instruction *IAfter, MemberGEPToTempMap &UniqueMemberGEPs );
+    void insertStoreInstOfTemp( Instruction *GEP, Value* Temp);
 
     // class info:
     // A map ( class name :-> offset of each member from base ) 
@@ -122,83 +139,6 @@ struct APIRace : public FunctionPass {
 
 };
 
-}
-
-
-static int checkSizeValidity(unsigned size) {
-    if ( size != 8 && size != 16 && size != 32 && size != 64
-        && size != 128 ) {
-        NumAccessesWithBadSize++;
-        errs() << " bad size of memory access or class declaration !!!!!!!!!!!!!!!!!!!!!!!!!!\n";
-        return -1;
-    }
-    return 0;
-}
-
-/**
- * Extract the class name from the given PointerType. 
- * OUTPUT: if it is a class pointer, return its class name, like "class.A" ; 
- *         otherwise, return "".
- *
- * NOTE: given a class with name A, in llvm, a StructType with name "class.A" is 
- * declared to represent class A, like
- *                
- * %class.A = type { ... , ... }
- *
- */
-static StringRef getClassName(Type *PT) {
-    if (PT==NULL) return StringRef("");
-    if (!isa<PointerType>(PT)) return StringRef("");
-    Type * baseTy = cast<PointerType>(PT)->getElementType();
-    if (!isa<StructType>(baseTy)) return StringRef("");
-    StructType * ST = cast<StructType>(baseTy);
-    if (!ST->hasName()) return StringRef("");
-    StringRef className = ST->getName();
-    static StringRef prefix = StringRef("class.");
-    if (!className.startswith(prefix)) return StringRef("");
-    return className;
-}
-
-/**
- * Extract the class type for a given funciton 'F'.
- * Return: if 'F' is a member funciton, return its class type;
- *         otherwise, return NULL.
- */
-static Type* getClassTypeOfMemberFunc(Function &F) {
-    Function::arg_iterator argIt = F.arg_begin();
-    Value * firstArg = argIt;
-    Type * typeOfFirstArg = firstArg->getType();
-    if (getClassName(typeOfFirstArg).size() != 0) return typeOfFirstArg;
-    return NULL; 
-}
-
-/**
- * Check if the given 'Member' is a non-static member of a class named 'TargetClassName'.
- */
-static bool isMemberOfClass( StringRef &TargetClassName, Value *Member ) {
-    GetElementPtrInst *GEP = dyn_cast<GetElementPtrInst>(Member);
-    if ( GEP ) {
-        Value *base = GEP->getPointerOperand();
-        Type *baseTy = base->getType();
-        StringRef className = getClassName(baseTy);
-        // FIXME:: access of B's public member in A's member function
-        if (className == TargetClassName) return true;
-        // this should work for static member funciton
-        if (TargetClassName.size() == 0) {  // match any class name
-            if (className.startswith(StringRef("class."))) return true;
-        }
-    }
-    return false;
-}
-
-static bool isMemberOfAnyClass( Value *Member ) {
-    if (!isa<GetElementPtrInst>(Member)) return false;
-    GetElementPtrInst *GEP = cast<GetElementPtrInst>(Member);
-    Value *base = GEP->getPointerOperand();
-    Type *baseTy = base->getType();
-    StringRef className = getClassName(baseTy);
-    if (className.startswith(StringRef("class."))) return true;
-    return false;
 }
 
 char APIRace::ID = 0;
@@ -378,7 +318,126 @@ bool APIRace::doInitialization(Module &M) {
     return Res;
 }
 
+bool APIRace::runOnFunction(Function &F) {
+    if (ClDebugTrack) errs() << "APIRace::runOnFunction\n";
+    if (ClDisableAll) return false;
+    if (!TD) return false;
 
+    // print out user-defined annotation
+    // TODO: we could use annotation string to specify special treatment to certain member, or
+    //      different checking granularity
+    AnnotationMap::iterator ann = AT.find(F.getName());
+
+    // check whether F is a non-static member function for a class
+    // if not, do nothing and return false
+    Type *classType = getClassTypeOfMemberFunc(F);
+    StringRef className = getClassName(classType);
+
+    if (className.size()==0) {
+        // className = ".....";
+        // FIXME: At this moment, we still need to instrument entry/exit of EVERY function 
+        // thus we can NOT return here.
+        // return false;
+    }
+
+    if (ClDebugVerbose) {
+        errs() << ">>>>>> Start Function " << F.getName() << " <<<<<<\n";
+        errs() << "# Annotation : " << ( (ann == AT.end()) ? "NONE" : ann->second )<< '\n';
+        errs() << "# Class Name : " << className <<'\n';  
+    }
+
+    // Traverse all instructions in this function:
+    // (1) collect loads/stores/returns, involving a class member
+    // (2) check for sync calls to pthread_*
+    // 
+    // NOTE: isSyncCall is recursive lazy evaluation on whether the call may contain sync 
+
+    SmallVector<Instruction*, 8> RetVec;
+    SmallVector<Instruction*, 8> LocalLoadsAndStores;
+    SmallVector<Instruction*, 8> LocalGEPs;
+    std::set<Value*> AllMemberLoads, AllMemberStores;
+    MemberGEPToTempMap UniqueMemberGEPs, DupMemberGEPs;
+    bool Res = false;
+    int SyncCallLvl = hasSyncCallInFunc(&F);
+    Instruction *Ihead = F.getEntryBlock().getFirstNonPHI();
+
+    if (ClDebugVerbose) {
+        errs() << "# Sync Level : " << SyncCallLvl << '\n';
+    }
+
+    for (Function::iterator FI = F.begin(), FE = F.end(); FI != FE; ++FI) {
+        BasicBlock &BB = *FI;
+
+        for (BasicBlock::iterator BI = BB.begin(), BE = BB.end(); BI != BE; ++BI) {
+            if (isa<LoadInst>(BI) || isa<StoreInst>(BI)) {
+                LocalLoadsAndStores.push_back(BI); 
+            } else if (isa<GetElementPtrInst>(BI)) {
+                LocalGEPs.push_back(BI);
+            } else if (isa<ReturnInst>(BI)) {
+                RetVec.push_back(BI);
+            } else if (isa<CallInst>(BI) || isa<InvokeInst>(BI)) {
+                int synclvl = isSyncCall(BI);
+                if (synclvl >= 0) NumSyncCalls++;
+                if (synclvl >= 0) {     // use your heuristics
+                    NumSyncCallsTreated++;
+                    // if BI is a potential syncall, not necessarily be,
+                    // (1) instrument all load and store before call
+                    groupAllClassMemberGEPsAndInsertTemps( Ihead, LocalGEPs, 
+                        UniqueMemberGEPs, DupMemberGEPs );
+                    groupLoadedAndStoredMembers( LocalLoadsAndStores, UniqueMemberGEPs,
+                        DupMemberGEPs, AllMemberLoads, AllMemberStores );
+                    instrumentLoadedAndStoredMemberInFunction( BI,
+                        AllMemberLoads, AllMemberStores,
+                        UniqueMemberGEPs, DupMemberGEPs);
+                    
+                    // (2) clear local temp after call
+                    nullAllTemps( BI, UniqueMemberGEPs );
+                }
+            }
+        }
+        groupAllClassMemberGEPsAndInsertTemps( Ihead, LocalGEPs, UniqueMemberGEPs,
+            DupMemberGEPs );
+        groupLoadedAndStoredMembers( LocalLoadsAndStores, UniqueMemberGEPs,
+            DupMemberGEPs, AllMemberLoads, AllMemberStores );
+    }
+    
+    // Instrument member loads and stores before returns
+    for (size_t i = 0, n = RetVec.size(); i < n; ++i) {
+        Res |= instrumentLoadedAndStoredMemberInFunction( RetVec[i],
+               AllMemberLoads, AllMemberStores, UniqueMemberGEPs, DupMemberGEPs);
+    }
+
+    // Instrument function entry/exit
+    if ( ClInstrumentFuncEntryExit && !ClDisableAll ) {
+        IRBuilder<> IRB(F.getEntryBlock().getFirstNonPHI());
+        Value *ReturnAddress = IRB.CreateCall(
+            Intrinsic::getDeclaration(F.getParent(), Intrinsic::returnaddress),
+            IRB.getInt32(0));
+        IRB.CreateCall(TsanFuncEntry, ReturnAddress);
+        for (size_t i = 0, n = RetVec.size(); i < n; ++i) {
+            IRBuilder<> IRBRet(RetVec[i]);
+            IRBRet.CreateCall(TsanFuncExit);
+        }
+        Res = true;
+    }
+
+    if (ClDebugVerbose) {
+
+        errs() << "\n### After instrumentation: " << F << '\n';
+        errs() << "-------------------------------\n";
+    }
+    return Res;
+}
+
+bool APIRace::doFinalization(Module& M) {
+    //PrintStatistics(errs());
+    return false;
+}
+
+/**
+ * find whether the `GEP' is in `UniqueMemberGEPs'. if yes, return associated iterator,
+ * else, return end()
+ */
 APIRace::MemberGEPToTempMap::iterator APIRace::findDuplicateGEP( GetElementPtrInst* GEP,
     MemberGEPToTempMap &UniqueMemberGEPs ) {
 
@@ -441,6 +500,10 @@ static int selectGEP( GetElementPtrInst *GEP ){
     return 0;
 }
 
+/**
+ * group unique and duplicate GEPs for the given `LocalGetElementPtrs',
+ * and insert alloca for temp ptrs.
+ */
 void APIRace::groupAllClassMemberGEPsAndInsertTemps( Instruction *InsertPoint,
     SmallVectorImpl<Instruction*> &LocalGetElementPtrs,
     MemberGEPToTempMap &UniqueMemberGEPs, MemberGEPToTempMap &DupMemberGEPs ) {
@@ -472,6 +535,9 @@ void APIRace::groupAllClassMemberGEPsAndInsertTemps( Instruction *InsertPoint,
     LocalGetElementPtrs.clear();
 }
 
+/**
+ * insert StoreInst to null all temp ptrs.
+ */
 void APIRace::nullAllTemps( Instruction *IAfter, MemberGEPToTempMap &UniqueMemberGEPs ) {
     
     for ( MemberGEPToTempMap::iterator It = UniqueMemberGEPs.begin(),
@@ -492,6 +558,9 @@ void APIRace::nullAllTemps( Instruction *IAfter, MemberGEPToTempMap &UniqueMembe
 
 }
 
+/**
+ * for given GEP, try to find <GEP,TEMP> pair from maps.
+ */
 std::pair<Value*, Value*> APIRace::findTempforGEP( GetElementPtrInst *GEP, MemberGEPToTempMap &UniqueGEPs, MemberGEPToTempMap &DupGEPs ) {
     std::pair<Value*, Value*> none_pair = std::pair<Value*, Value*>( NULL, NULL );
     MemberGEPToTempMap::iterator found;
@@ -506,7 +575,9 @@ std::pair<Value*, Value*> APIRace::findTempforGEP( GetElementPtrInst *GEP, Membe
     return none_pair;
 }
 
-
+/**
+ * find member loads and member stores from `LocalLoadAndStors'.
+ */
 void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalLoadAndStores,
     MemberGEPToTempMap &UniqueGEPs, MemberGEPToTempMap &DupGEPs,
     std::set<Value*> &AllMemberLoads, 
@@ -522,8 +593,14 @@ void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalL
             GetElementPtrInst *GEP = cast<GetElementPtrInst>(PointerOperand);
             Value *Temp = findTempforGEP( GEP, UniqueGEPs, DupGEPs ).first;
             if ( Temp != NULL ) {
-                IRBuilder<> IRB(SI);
-                IRB.CreateStore( GEP, Temp );
+                if (ClInsertTempStoreExact) {
+                    IRBuilder<> IRB(SI);
+                    IRB.CreateStore( GEP, Temp );
+                } else {
+                    if(!AllMemberStores.count(Temp)) {
+                        insertStoreInstOfTemp( GEP, Temp );
+                    }
+                }
                 AllMemberStores.insert( Temp );
                 WriteTargets.insert(GEP);                
             }
@@ -544,8 +621,14 @@ void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalL
             }
             Value *Temp = findTempforGEP( GEP, UniqueGEPs, DupGEPs ).second;
             if ( Temp != NULL ) {
-                IRBuilder<> IRB(LI);
-                IRB.CreateStore( GEP, Temp );
+                if(ClInsertTempStoreExact) {
+                    IRBuilder<> IRB(LI);
+                    IRB.CreateStore( GEP, Temp );
+                } else {
+                    if (!AllMemberLoads.count(Temp)) {
+                        insertStoreInstOfTemp( GEP, Temp );
+                    }
+                }
                 AllMemberLoads.insert(Temp);
             }
         }
@@ -553,6 +636,9 @@ void APIRace::groupLoadedAndStoredMembers( SmallVectorImpl<Instruction*> &LocalL
     LocalLoadAndStores.clear();
 }
 
+/**
+ * deprecated method.
+ */
 void APIRace::selectLoadAndStoreInstructions( StringRef &TargetClassName,
     SmallVectorImpl<Instruction*> &LocalLoadAndStores,
     SmallVectorImpl<Instruction*> &MemberLoadAndStores ) {
@@ -580,120 +666,9 @@ void APIRace::selectLoadAndStoreInstructions( StringRef &TargetClassName,
     LocalLoadAndStores.clear();
 }
 
-bool APIRace::runOnFunction(Function &F) {
-    if (ClDebugTrack) errs() << "APIRace::runOnFunction\n";
-    if (!TD) return false;
-
-    // print out user-defined annotation
-    // TODO: we could use annotation string to specify special treatment to certain member, or
-    //      different checking granularity
-    AnnotationMap::iterator ann = AT.find(F.getName());
-
-    // check whether F is a non-static member function for a class
-    // if not, do nothing and return false
-    Type *classType = getClassTypeOfMemberFunc(F);
-    StringRef className = getClassName(classType);
-    //extraceClassInfo( classType ); 
-
-    if (className.size()==0) {
-        // className = ".....";
-        // FIXME: At this moment, we still need to instrument entry/exit of EVERY function 
-        // thus we can NOT return here.
-        // FIXME: in C++ there will be static member function, which can access class member.
-        // those functions are treated as like c function without passing pointer to the 
-        // class instance (of course, it is static!). Then, we cannot decide whether this function
-        // is a static member function or not. therefore, if the name is missing, it means
-        // any class member access must be instrumented!!!
-        // return false;
-    }
-
-    if (ClDebugVerbose) {
-        errs() << ">>>>>> Start Function " << F.getName() << " <<<<<<\n";
-        errs() << "# Annotation : " << ( (ann == AT.end()) ? "NONE" : ann->second )<< '\n';
-        errs() << "# Class Name : " << className <<'\n';  
-    }
-
-    // Traverse all instructions in this function:
-    // (1) collect loads/stores/returns, involving a class member
-    // (2) check for sync calls to pthread_*
-    // 
-    // NOTE: isSyncCall is recursive lazy evaluation on whether the call may contain sync 
-
-    SmallVector<Instruction*, 8> RetVec;
-    SmallVector<Instruction*, 8> LocalLoadsAndStores;
-    //SmallVector<Instruction*, 8> MemberLoadsAndStores;
-    SmallVector<Instruction*, 8> LocalGEPs;
-    std::set<Value*> AllMemberLoads, AllMemberStores;
-    MemberGEPToTempMap UniqueMemberGEPs, DupMemberGEPs;
-    bool Res = false;
-    int SyncCallLvl = hasSyncCallInFunc(&F);
-    Instruction *Ihead = F.getEntryBlock().getFirstNonPHI();
-
-    if (ClDebugVerbose) {
-        errs() << "# Sync Level : " << SyncCallLvl << '\n';
-    }
-
-    for (Function::iterator FI = F.begin(), FE = F.end(); FI != FE; ++FI) {
-        BasicBlock &BB = *FI;
-
-        for (BasicBlock::iterator BI = BB.begin(), BE = BB.end(); BI != BE; ++BI) {
-            if (isa<LoadInst>(BI) || isa<StoreInst>(BI)) {
-                LocalLoadsAndStores.push_back(BI); 
-            } else if (isa<GetElementPtrInst>(BI)) {
-                LocalGEPs.push_back(BI);
-            } else if (isa<ReturnInst>(BI)) {
-                RetVec.push_back(BI);
-            } else if (isa<CallInst>(BI) || isa<InvokeInst>(BI)) {
-                if (isSyncCall(BI) >= 0) {
-                    // if BI is a potential syncall, not necessarily be,
-                    // (1) instrument all load and store before call
-                    groupAllClassMemberGEPsAndInsertTemps( Ihead, LocalGEPs, 
-                        UniqueMemberGEPs, DupMemberGEPs );
-                    groupLoadedAndStoredMembers( LocalLoadsAndStores, UniqueMemberGEPs,
-                        DupMemberGEPs, AllMemberLoads, AllMemberStores );
-                    instrumentLoadedAndStoredMemberInFunction( BI,
-                        AllMemberLoads, AllMemberStores,
-                        UniqueMemberGEPs, DupMemberGEPs);
-                    
-                    // (2) clear local temp after call
-                    nullAllTemps( BI, UniqueMemberGEPs );
-                }
-            }
-        }
-        groupAllClassMemberGEPsAndInsertTemps( Ihead, LocalGEPs, UniqueMemberGEPs,
-            DupMemberGEPs );
-        groupLoadedAndStoredMembers( LocalLoadsAndStores, UniqueMemberGEPs,
-            DupMemberGEPs, AllMemberLoads, AllMemberStores );
-    }
-    
-    // Instrument member loads and stores before returns
-    for (size_t i = 0, n = RetVec.size(); i < n; ++i) {
-        Res |= instrumentLoadedAndStoredMemberInFunction( RetVec[i],
-               AllMemberLoads, AllMemberStores, UniqueMemberGEPs, DupMemberGEPs);
-    }
-
-    // Instrument function entry/exit
-    if ( ClInstrumentFuncEntryExit && !ClDisableAll ) {
-        IRBuilder<> IRB(F.getEntryBlock().getFirstNonPHI());
-        Value *ReturnAddress = IRB.CreateCall(
-            Intrinsic::getDeclaration(F.getParent(), Intrinsic::returnaddress),
-            IRB.getInt32(0));
-        IRB.CreateCall(TsanFuncEntry, ReturnAddress);
-        for (size_t i = 0, n = RetVec.size(); i < n; ++i) {
-            IRBuilder<> IRBRet(RetVec[i]);
-            IRBRet.CreateCall(TsanFuncExit);
-        }
-        Res = true;
-    }
-
-    if (ClDebugVerbose) {
-
-        errs() << "\n### After instrumentation: " << F << '\n';
-        errs() << "-------------------------------\n";
-    }
-    return Res;
-}
-
+/**
+ * deprecated method
+ */
 Instruction *APIRace::findInstructionAfterThis1(Function &F, StringRef &TargetClassName) {
     BasicBlock &EntryBlock = F.getEntryBlock();
     BasicBlock::iterator BI, BE;
@@ -720,15 +695,15 @@ Instruction *APIRace::findInstructionAfterThis1(Function &F, StringRef &TargetCl
     FI++;
     return FI->getFirstNonPHI();
 }
-/*
-void APIRace::insertStoreInstOfTemp( Instruction *I, Value* Temp) {
+
+void APIRace::insertStoreInstOfTemp( Instruction *GEP, Value* Temp) {
     Instruction *DUM = new AllocaInst(Type::getInt8PtrTy(GEP->getContext()));
     DUM->insertAfter(GEP);
-    IRBuilder<> IRB(I);
+    IRBuilder<> IRB(DUM);
     IRB.CreateStore( GEP, Temp );
     DUM->eraseFromParent();
     return;
-}*/
+}
 
 bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *Insert,
     std::set<Value*> &AllMemberLoads,  std::set<Value*> &AllMemberStores,
@@ -736,44 +711,7 @@ bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *Insert,
 
     if (!ClInstrumentMemberLoadAndStore || ClDisableAll) return false;
 
-//    std::set<Value*> LoadTemps, StoreTemps;
     bool Res = false;
-
-/*
-    for (std::set<LoadInst*>::reverse_iterator It = AllMemberLoads.rbegin(), 
-        End = AllMemberLoads.rend(); It != End; ++It ) {
-
-        LoadInst *LI = *It;
-        GetElementPtrInst *GEP = cast<GetElementPtrInst>(LI->getPointerOperand());
-        Value *Temp = findTempforGEP( GEP, UniqueMemberGEPs, DupMemberGEPs ).first;
-        IRBuilder<> IRB(LI);
-        IRB.CreateStore( GEP, Temp );
-        LoadTemps.insert(Temp);
-    
-        if (ClDebugVerbose) {
-            errs() << "# INSTR Load : " << GEP->getName() << "\n";
-        }
-        NumInstrumentedReads++;
-        Res |= true;
-    }
-
-    for (std::set<StoreInst*>::reverse_iterator It = AllMemberStores.rbegin(),
-        End = AllMemberStores.rend(); It != End; ++It ) {
-
-        StoreInst *SI = *It;
-        GetElementPtrInst *GEP = cast<GetElementPtrInst>(SI->getPointerOperand());
-        Value *Temp = findTempforGEP( GEP, UniqueMemberGEPs, DupMemberGEPs ).second;
-        IRBuilder<> IRB(SI);
-        IRB.CreateStore( GEP, Temp );
-        StoreTemps.insert(Temp);
-
-        if (ClDebugVerbose) {
-            errs() << "# INSTR Store : " << GEP->getName() << "\n";
-        }
-        NumInstrumentedWrites++;
-        Res |= true;
-    }
-*/
     IRBuilder<> IRBtail(Insert);
 
     for (std::set<Value*>::reverse_iterator It = AllMemberLoads.rbegin(),
@@ -785,6 +723,7 @@ bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *Insert,
         if (Idx < 0) continue;
         IRBtail.CreateCall(TsanRead[Idx], IRBtail.CreatePointerCast(
                 IRBtail.CreateLoad(*It), IRBtail.getInt8PtrTy() ));
+        NumInstrumentedReads++;
     }
 
     for (std::set<Value*>::reverse_iterator It = AllMemberStores.rbegin(),
@@ -796,10 +735,14 @@ bool APIRace::instrumentLoadedAndStoredMemberInFunction( Instruction *Insert,
         if (Idx < 0) continue;
         IRBtail.CreateCall(TsanWrite[Idx], IRBtail.CreatePointerCast(
                 IRBtail.CreateLoad(*It), IRBtail.getInt8PtrTy() ));
+        NumInstrumentedWrites++;
     }
     return Res;
 }
 
+/**
+ * deprecated method.
+ */
 bool APIRace::instrumentExactLoadOrStore(Instruction *I) {
     if (!ClInstrumentMemberLoadAndStore || ClDisableAll) return false;
 
@@ -844,11 +787,6 @@ int APIRace::getMemoryAccessFuncIndexFromType(Type *OrigPtrTy) {
     return Idx;
 }
 
-bool APIRace::doFinalization(Module& M) {
-    //PrintStatistics(errs());
-    return false;
-}
-
 void APIRace::extraceClassInfo( Type* classType ) {
     if (classType == NULL) return;
     //errs() << *classType << '\n';
@@ -880,4 +818,82 @@ void APIRace::extraceClassInfo( Type* classType ) {
     
     CIM[className] = offsets;
     return;
+}
+
+
+// auxiliary function bodies
+static int checkSizeValidity(unsigned size) {
+    if ( size != 8 && size != 16 && size != 32 && size != 64
+        && size != 128 ) {
+        NumAccessesWithBadSize++;
+        errs() << " bad size of memory access or class declaration !!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+        return -1;
+    }
+    return 0;
+}
+
+/**
+ * Extract the class name from the given PointerType. 
+ * OUTPUT: if it is a class pointer, return its class name, like "class.A" ; 
+ *         otherwise, return "".
+ *
+ * NOTE: given a class with name A, in llvm, a StructType with name "class.A" is 
+ * declared to represent class A, like
+ *                
+ * %class.A = type { ... , ... }
+ *
+ */
+static StringRef getClassName(Type *PT) {
+    if (PT==NULL) return StringRef("");
+    if (!isa<PointerType>(PT)) return StringRef("");
+    Type * baseTy = cast<PointerType>(PT)->getElementType();
+    if (!isa<StructType>(baseTy)) return StringRef("");
+    StructType * ST = cast<StructType>(baseTy);
+    if (!ST->hasName()) return StringRef("");
+    StringRef className = ST->getName();
+    static StringRef prefix = StringRef("class.");
+    if (!className.startswith(prefix)) return StringRef("");
+    return className;
+}
+
+/**
+ * Extract the class type for a given funciton 'F'.
+ * Return: if 'F' is a member funciton, return its class type;
+ *         otherwise, return NULL.
+ */
+static Type* getClassTypeOfMemberFunc(Function &F) {
+    Function::arg_iterator argIt = F.arg_begin();
+    Value * firstArg = argIt;
+    Type * typeOfFirstArg = firstArg->getType();
+    if (getClassName(typeOfFirstArg).size() != 0) return typeOfFirstArg;
+    return NULL; 
+}
+
+/**
+ * Check if the given 'Member' is a non-static member of a class named 'TargetClassName'.
+ */
+static bool isMemberOfClass( StringRef &TargetClassName, Value *Member ) {
+    GetElementPtrInst *GEP = dyn_cast<GetElementPtrInst>(Member);
+    if ( GEP ) {
+        Value *base = GEP->getPointerOperand();
+        Type *baseTy = base->getType();
+        StringRef className = getClassName(baseTy);
+        // FIXME:: access of B's public member in A's member function
+        if (className == TargetClassName) return true;
+        // this should work for static member funciton
+        if (TargetClassName.size() == 0) {  // match any class name
+            if (className.startswith(StringRef("class."))) return true;
+        }
+    }
+    return false;
+}
+
+static bool isMemberOfAnyClass( Value *Member ) {
+    if (!isa<GetElementPtrInst>(Member)) return false;
+    GetElementPtrInst *GEP = cast<GetElementPtrInst>(Member);
+    Value *base = GEP->getPointerOperand();
+    Type *baseTy = base->getType();
+    StringRef className = getClassName(baseTy);
+    if (className.startswith(StringRef("class."))) return true;
+    return false;
 }

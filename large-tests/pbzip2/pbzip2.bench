@@ -1,0 +1,217 @@
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2 -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 16.807441 seconds
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2 -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 15.803386 seconds
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2 -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 15.666201 seconds
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2.apirace.x -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 19.979533 seconds
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2.apirace.x -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 20.053213 seconds
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2.apirace.x -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 19.712902 seconds
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2.tsan.x -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+==================
+WARNING: ThreadSanitizer: data race (pid=19942)
+  Read of size 4 at 0x7fe53e075548 by thread 5:
+    #0 fileWriter ??:0 (exe+0x00000000beca)
+
+  Previous write of size 4 at 0x7fe53e075548 by main thread:
+    #0 producer(int, int, queue*) ??:0 (exe+0x00000000d559)
+    #1 main ??:0 (exe+0x000000011268)
+
+  Thread 5 (tid=19947, running) created at:
+    #0 pthread_create ??:0 (exe+0x000000021619)
+    #1 main ??:0 (exe+0x000000011248)
+
+==================
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 19.851674 seconds
+ThreadSanitizer: reported 1 warnings
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2.tsan.x -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+==================
+WARNING: ThreadSanitizer: data race (pid=19953)
+  Read of size 4 at 0x7f388eb06548 by thread 5:
+    #0 fileWriter ??:0 (exe+0x00000000beca)
+
+  Previous write of size 4 at 0x7f388eb06548 by main thread:
+    #0 producer(int, int, queue*) ??:0 (exe+0x00000000d559)
+    #1 main ??:0 (exe+0x000000011268)
+
+  Thread 5 (tid=19958, running) created at:
+    #0 pthread_create ??:0 (exe+0x000000021619)
+    #1 main ??:0 (exe+0x000000011248)
+
+==================
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 19.381241 seconds
+ThreadSanitizer: reported 1 warnings
+jing@linux-crsq:~/src/APIRace/large-tests/tests> ../pbzip2-1.1.6/pbzip2.tsan.x -p2 -v -c < test.mp4 > /dev/null 
+Parallel BZIP2 v1.1.6 - by: Jeff Gilchrist [http://compression.ca]
+[Oct. 30, 2011]               (uses libbzip2 by Julian Seward)
+Major contributions: Yavor Nikolov <nikolov.javor+pbzip2@gmail.com>
+
+         # CPUs: 2
+ BWT Block Size: 900 KB
+File Block Size: 900 KB
+ Maximum Memory: 100 MB
+-------------------------------------------
+         File #: 1 of 1
+     Input Name: <stdin>
+    Output Name: <stdout>
+
+Compressing data...
+==================
+WARNING: ThreadSanitizer: data race (pid=19964)
+  Read of size 4 at 0x7f0dd9431548 by thread 5:
+    #0 fileWriter ??:0 (exe+0x00000000beca)
+
+  Previous write of size 4 at 0x7f0dd9431548 by main thread:
+    #0 producer(int, int, queue*) ??:0 (exe+0x00000000d559)
+    #1 main ??:0 (exe+0x000000011268)
+
+  Thread 5 (tid=19969, running) created at:
+    #0 pthread_create ??:0 (exe+0x000000021619)
+    #1 main ??:0 (exe+0x000000011248)
+
+==================
+    Output Size: 155898256 bytes
+-------------------------------------------
+
+     Wall Clock: 19.920134 seconds
+ThreadSanitizer: reported 1 warnings
+

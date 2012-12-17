@@ -1,0 +1,1819 @@
+Creating resource group General
+Creating resource group Internal
+Creating resource group Autodetect
+SceneManagerFactory for type 'DefaultSceneManager' registered.
+Registering ResourceManager for type Material
+Registering ResourceManager for type Mesh
+Registering ResourceManager for type Skeleton
+MovableObjectFactory for type 'ParticleSystem' registered.
+ArchiveFactory for archive type FileSystem registered.
+DDS codec registering
+FreeImage version: 3.13.0
+This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic
+ETC1 codec registering
+Registering ResourceManager for type HighLevelGpuProgram
+Registering ResourceManager for type Compositor
+MovableObjectFactory for type 'Entity' registered.
+MovableObjectFactory for type 'Light' registered.
+MovableObjectFactory for type 'BillboardSet' registered.
+MovableObjectFactory for type 'ManualObject' registered.
+MovableObjectFactory for type 'BillboardChain' registered.
+MovableObjectFactory for type 'RibbonTrail' registered.
+*-*-* OGRE Initialising
+*-*-* Version 1.9.0unstable (Ghadamon)
+Installing plugin: GL RenderSystem
+OpenGL Rendering Subsystem created.
+Plugin successfully installed
+Installing plugin: ParticleFX
+Particle Emitter Type 'Point' registered
+Particle Emitter Type 'Box' registered
+Particle Emitter Type 'Ellipsoid' registered
+Particle Emitter Type 'Cylinder' registered
+Particle Emitter Type 'Ring' registered
+Particle Emitter Type 'HollowEllipsoid' registered
+Particle Affector Type 'LinearForce' registered
+Particle Affector Type 'ColourFader' registered
+Particle Affector Type 'ColourFader2' registered
+Particle Affector Type 'ColourImage' registered
+Particle Affector Type 'ColourInterpolator' registered
+Particle Affector Type 'Scaler' registered
+Particle Affector Type 'Rotator' registered
+Particle Affector Type 'DirectionRandomiser' registered
+Particle Affector Type 'DeflectorPlane' registered
+Plugin successfully installed
+ArchiveFactory for archive type BLEND registered.
+OverlayElementFactory for type Panel registered.
+OverlayElementFactory for type BorderPanel registered.
+OverlayElementFactory for type TextArea registered.
+Registering ResourceManager for type Font
+CPU Identifier & Features
+-------------------------
+ *   CPU ID: GenuineIntel: Intel(R) Core(TM) i7-2760QM CPU @ 2.40GHz
+ *      SSE: yes
+ *     SSE2: yes
+ *     SSE3: yes
+ *      MMX: yes
+ *   MMXEXT: yes
+ *    3DNOW: no
+ * 3DNOWEXT: no
+ *     CMOV: yes
+ *      TSC: yes
+ *      FPU: yes
+ *      PRO: yes
+ *       HT: no
+-------------------------
+******************************
+*** Starting GLX Subsystem ***
+******************************
+Registering ResourceManager for type Texture
+Added resource location '' of type 'BLEND' to resource group 'General'
+Particle Emitter Type 'gkEmitter' registered
+Particle Affector Type 'gkAffector' registered
+Particle Renderer Type 'gkBillboard' registered
+GLRenderSystem::_createRenderWindow "OgreKit Demo (Press Escape to exit)[momo_ogre.blend]", 800x600 windowed  miscParams: 
+GLXWindow::create used FBConfigID = 163
+GL_VERSION = 2.1 Mesa 8.0.4
+GL_VENDOR = VMware, Inc.
+GL_RENDERER = Gallium 0.4 on SVGA3D; build: RELEASE;  
+GL_EXTENSIONS = GL_ARB_multisample GL_EXT_abgr GL_EXT_bgra GL_EXT_blend_color GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_copy_texture GL_EXT_polygon_offset GL_EXT_subtexture GL_EXT_texture_object GL_EXT_vertex_array GL_EXT_compiled_vertex_array GL_EXT_texture GL_EXT_texture3D GL_IBM_rasterpos_clip GL_ARB_point_parameters GL_EXT_draw_range_elements GL_EXT_packed_pixels GL_EXT_point_parameters GL_EXT_rescale_normal GL_EXT_separate_specular_color GL_EXT_texture_edge_clamp GL_SGIS_generate_mipmap GL_SGIS_texture_border_clamp GL_SGIS_texture_edge_clamp GL_SGIS_texture_lod GL_ARB_framebuffer_sRGB GL_ARB_multitexture GL_EXT_framebuffer_sRGB GL_IBM_multimode_draw_arrays GL_IBM_texture_mirrored_repeat GL_ARB_texture_cube_map GL_ARB_texture_env_add GL_ARB_transpose_matrix GL_EXT_blend_func_separate GL_EXT_fog_coord GL_EXT_multi_draw_arrays GL_EXT_secondary_color GL_EXT_texture_env_add GL_EXT_texture_filter_anisotropic GL_EXT_texture_lod_bias GL_INGR_blend_func_separate GL_NV_blend_square GL_NV_light_max_exponent GL_NV_texgen_reflection GL_NV_texture_env_combine4 GL_SUN_multi_draw_arrays GL_ARB_texture_border_clamp GL_ARB_texture_compression GL_EXT_framebuffer_object GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_MESA_window_pos GL_NV_packed_depth_stencil GL_NV_texture_rectangle GL_ARB_depth_texture GL_ARB_occlusion_query GL_ARB_shadow GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_mirrored_repeat GL_ARB_window_pos GL_EXT_stencil_two_side GL_EXT_texture_cube_map GL_NV_fog_distance GL_APPLE_packed_pixels GL_APPLE_vertex_array_object GL_ARB_draw_buffers GL_ARB_fragment_program GL_ARB_fragment_shader GL_ARB_shader_objects GL_ARB_vertex_program GL_ARB_vertex_shader GL_ATI_draw_buffers GL_ATI_texture_env_combine3 GL_ATI_texture_float GL_EXT_shadow_funcs GL_EXT_stencil_wrap GL_MESA_pack_invert GL_NV_primitive_restart GL_ARB_fragment_program_shadow GL_ARB_half_float_pixel GL_ARB_occlusion_query2 GL_ARB_point_sprite GL_ARB_shading_language_100 GL_ARB_sync GL_ARB_texture_non_power_of_two GL_ARB_vertex_buffer_object GL_ATI_blend_equation_separate GL_EXT_blend_equation_separate GL_OES_read_format GL_ARB_pixel_buffer_object GL_ARB_texture_float GL_ARB_texture_rectangle GL_EXT_pixel_buffer_object GL_EXT_texture_rectangle GL_EXT_texture_sRGB GL_ARB_framebuffer_object GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_packed_depth_stencil GL_ARB_vertex_array_object GL_ATI_separate_stencil GL_EXT_gpu_program_parameters GL_EXT_texture_sRGB_decode GL_OES_EGL_image GL_ARB_copy_buffer GL_ARB_half_float_vertex GL_ARB_map_buffer_range GL_ARB_texture_swizzle GL_ARB_vertex_array_bgra GL_EXT_separate_shader_objects GL_EXT_texture_swizzle GL_EXT_vertex_array_bgra GL_ARB_draw_elements_base_vertex GL_ARB_explicit_attrib_location GL_ARB_fragment_coord_conventions GL_ARB_provoking_vertex GL_ARB_sampler_objects GL_EXT_provoking_vertex GL_ARB_robustness GL_ARB_texture_storage 
+Supported GLX extensions: GLX_ARB_create_context GLX_ARB_get_proc_address GLX_ARB_multisample GLX_EXT_import_context GLX_EXT_visual_info GLX_EXT_visual_rating GLX_MESA_copy_sub_buffer GLX_MESA_multithread_makecurrent GLX_MESA_swap_control GLX_OML_swap_method GLX_SGI_make_current_read GLX_SGI_video_sync GLX_SGIS_multisample GLX_SGIX_fbconfig GLX_SGIX_pbuffer GLX_SGIX_visual_select_group GLX_EXT_texture_from_pixmap 
+***************************
+*** GL Renderer Started ***
+***************************
+Registering ResourceManager for type GpuProgram
+GLSL support detected
+GL: Using GL_EXT_framebuffer_object for rendering to textures (best)
+FBO PF_UNKNOWN depth/stencil support: D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_A4L4 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_BYTE_LA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_R5G6B5 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_B5G6R5 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_A4R4G4B4 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_A1R5G5B5 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_R8G8B8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_B8G8R8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_A8R8G8B8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_B8G8R8A8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_A2R10G10B10 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_A2B10G10R10 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT16_RGB depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT16_RGBA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT32_RGB depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT32_RGBA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_X8R8G8B8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_X8B8G8R8 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_SHORT_RGBA depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_R3G3B2 depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT16_R depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT32_R depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_SHORT_GR depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT16_GR depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_FLOAT32_GR depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+FBO PF_SHORT_RGB depth/stencil support: D0S0 D0S1 D0S4 D0S8 D0S16 D16S0 D24S0 D32S0 Packed-D24S8 
+[GL] : Valid FBO targets PF_UNKNOWN PF_A4L4 PF_BYTE_LA PF_R5G6B5 PF_B5G6R5 PF_A4R4G4B4 PF_A1R5G5B5 PF_R8G8B8 PF_B8G8R8 PF_A8R8G8B8 PF_B8G8R8A8 PF_A2R10G10B10 PF_A2B10G10R10 PF_FLOAT16_RGB PF_FLOAT16_RGBA PF_FLOAT32_RGB PF_FLOAT32_RGBA PF_X8R8G8B8 PF_X8B8G8R8 PF_SHORT_RGBA PF_R3G3B2 PF_FLOAT16_R PF_FLOAT32_R PF_SHORT_GR PF_FLOAT16_GR PF_FLOAT32_GR PF_SHORT_RGB 
+RenderSystem capabilities
+-------------------------
+RenderSystem Name: OpenGL Rendering Subsystem
+GPU Vendor: unknown
+Device Name: Gallium 0.4 on SVGA3D; build: RELEASE;  
+Driver Version: 2.1.0.0
+ * Fixed function pipeline: yes
+ * Hardware generation of mipmaps: yes
+ * Texture blending: yes
+ * Anisotropic texture filtering: yes
+ * Dot product texture operation: yes
+ * Cube mapping: yes
+ * Hardware stencil buffer: yes
+   - Stencil depth: 8
+   - Two sided stencil support: yes
+   - Wrap stencil values: yes
+ * Hardware vertex / index buffers: yes
+ * Vertex programs: yes
+ * Number of floating-point constants for vertex programs: 4096
+ * Number of integer constants for vertex programs: 0
+ * Number of boolean constants for vertex programs: 0
+ * Fragment programs: yes
+ * Number of floating-point constants for fragment programs: 224
+ * Number of integer constants for fragment programs: 0
+ * Number of boolean constants for fragment programs: 0
+ * Geometry programs: no
+ * Number of floating-point constants for geometry programs: 0
+ * Number of integer constants for geometry programs: 0
+ * Number of boolean constants for geometry programs: 0
+ * Tesselation Hull programs: no
+ * Number of floating-point constants for tesselation hull programs: 0
+ * Number of integer constants for tesselation hull programs: 0
+ * Number of boolean constants for tesselation hull programs: 0
+ * Tesselation Domain programs: no
+ * Number of floating-point constants for tesselation domain programs: 0
+ * Number of integer constants for tesselation domain programs: 0
+ * Number of boolean constants for tesselation domain programs: 0
+ * Compute programs: no
+ * Number of floating-point constants for compute programs: 0
+ * Number of integer constants for compute programs: 0
+ * Number of boolean constants for compute programs: 0
+ * Supported Shader Profiles: arbfp1 arbvp1 glsl
+ * Texture Compression: yes
+   - DXT: no
+   - VTC: no
+   - PVRTC: no
+ * Scissor Rectangle: yes
+ * Hardware Occlusion Query: yes
+ * User clip planes: yes
+ * VET_UBYTE4 vertex element type: yes
+ * Infinite far plane projection: yes
+ * Hardware render-to-texture: yes
+ * Floating point textures: yes
+ * Non-power-of-two textures: yes
+ * 1d textures: yes
+ * Volume textures: yes
+ * Multiple Render Targets: 4
+   - With different bit depths: yes
+ * Point Sprites: yes
+ * Extended point parameters: yes
+ * Max Point Size: 80
+ * Vertex texture fetch: no
+ * Number of world matrices: 0
+ * Number of texture units: 16
+ * Stencil buffer depth: 8
+ * Number of vertex blend matrices: 0
+ * Render to Vertex Buffer : no
+ * GL 1.5 without VBO workaround: no
+ * Frame Buffer objects: yes
+ * Frame Buffer objects (ARB extension): no
+ * Frame Buffer objects (ATI extension): no
+ * PBuffer support: yes
+ * GL 1.5 without HW-occlusion workaround: no
+ * Vertex Array Objects: no
+ * Separate shader objects: no
+DefaultWorkQueue('Root') initialising on thread main.
+Particle Renderer Type 'billboard' registered
+WINDOW handle: 0x5a00002
+Engine: Failed to load resource file!
+'res.cfg' file not found!
+Creating resource group <gkBuiltin>
+Parsing scripts for resource group <gkBuiltin>
+Finished parsing scripts for resource group <gkBuiltin>
+Creating resources for group <gkBuiltin>
+All done
+Parsing scripts for resource group Autodetect
+Finished parsing scripts for resource group Autodetect
+Creating resources for group Autodetect
+All done
+Parsing scripts for resource group General
+Finished parsing scripts for resource group General
+Creating resources for group General
+All done
+Parsing scripts for resource group Internal
+Finished parsing scripts for resource group Internal
+Creating resources for group Internal
+All done
+Texture: <gkBuiltin/FlareAlpah64.png>: Loading 1 faces(PF_A8R8G8B8,64x64x1) with 6 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,64x64x1.
+Font <gkBuiltin/Font>using texture size 256x256
+Info: Freetype returned null for character 160 in font <gkBuiltin/Font>
+Texture: <gkBuiltin/Font>Texture: Loading 1 faces(PF_BYTE_LA,256x256x1) Internal format is PF_BYTE_LA,256x256x1.
+Creating resource group 
+Sound: Loaded buffer Break.
+Sound: Loaded buffer Fly.
+Sound: Loaded buffer bird_splat.ogg.
+Sound: Loaded buffer Impact.
+Sound: Loaded buffer msx_fight.ogg.
+Sound: Loaded buffer Step.
+Texture: SkyFront.png: Loading 1 faces(PF_R8G8B8,256x256x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: SkyBack.png: Loading 1 faces(PF_R8G8B8,256x256x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: SkyLeft.png: Loading 1 faces(PF_R8G8B8,256x256x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: SkyRight.png: Loading 1 faces(PF_R8G8B8,256x256x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: SkyTop.png: Loading 1 faces(PF_A8R8G8B8,2x2x1) with 1 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,2x2x1.
+Texture: SkyBottom.png: Loading 1 faces(PF_A8R8G8B8,2x2x1) with 1 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,2x2x1.
+Texture: Bridge: Loading 1 faces(PF_A8R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,512x512x1.
+Texture: Dirt: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: GroundAlpha: Loading 1 faces(PF_A8R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,512x512x1.
+Texture: Grass: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: GroundAO: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: MomoTex: Loading 1 faces(PF_A8R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,512x512x1.
+Texture: Weeds.png: Loading 1 faces(PF_A8R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,512x512x1.
+Texture: Fern: Loading 1 faces(PF_A8R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,512x512x1.
+Texture: OverHang: Loading 1 faces(PF_A8R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,512x512x1.
+Texture: Stone: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: crate.jpg: Loading 1 faces(PF_R8G8B8,256x256x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: StoneCliff.jpg: Loading 1 faces(PF_R8G8B8,1024x256x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,1024x256x1.
+Texture: PlatBigAO.tga: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: PlatMedAO.tga: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: Stump: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: Bark: Loading 1 faces(PF_R8G8B8,512x512x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,512x512x1.
+Texture: Leaves: Loading 1 faces(PF_A8R8G8B8,1024x1024x1) with 5 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,1024x1024x1.
+GObj:Tree0_Leaves/UID{0} Pos:-2.06212 -1.11566 4.89329
+PObj:Tree0/UID{0} Pos:-0.0349803 0.394904 0
+GObj:Tree0_Leaves/UID{1} Pos:-2.06212 -1.11566 4.89329
+PObj:Tree0/UID{1} Pos:-0.0349803 0.394904 0
+GObj:Tree0_Leaves/UID{2} Pos:-2.06212 -1.11566 4.89329
+PObj:Tree0/UID{2} Pos:-0.0349803 0.394904 0
+GObj:Tree0_Leaves/UID{3} Pos:-2.06212 -1.11566 4.89329
+PObj:Tree0/UID{3} Pos:-0.0349803 0.394904 0
+GObj:Tree1_Leaves/UID{0} Pos:0.720597 3.13295 5.09733
+PObj:Tree1/UID{0} Pos:-0.0653949 0.2881 0
+GObj:Tree1_Leaves/UID{1} Pos:0.720597 3.13295 5.09733
+PObj:Tree1/UID{1} Pos:-0.0653949 0.2881 0
+GObj:Tree1_Leaves/UID{2} Pos:0.720597 3.13295 5.09733
+PObj:Tree1/UID{2} Pos:-0.0653949 0.2881 0
+GObj:Tree1_Leaves/UID{3} Pos:0.720597 3.13295 5.09733
+PObj:Tree1/UID{3} Pos:-0.0653949 0.2881 0
+GObj:Tree1_Leaves/UID{4} Pos:0.720597 3.13295 5.09733
+PObj:Tree1/UID{4} Pos:-0.0653949 0.2881 0
+GObj:Tree2_Leaves/UID{0} Pos:0.740791 -3.54882 3.7085
+PObj:Tree2/UID{0} Pos:-0.564522 -0.412489 0
+GObj:RigMomo Pos:0 0 0.0311014
+PObj:Player Pos:0 0 0.317815
+GObj:MeshMomo Pos:0 0 0.0311014
+PObj:RigMomo Pos:0 0 -0.286714
+GObj:Spawn Pos:6.9619e-15 0.4899 0.382446
+PObj:MeshMomo Pos:0 0 0
+GObj:xRot Pos:0 0 0.5
+PObj:zRot Pos:0 0 0.5
+GObj:View Pos:0 -1 0.460457
+PObj:xRot Pos:0 0 0
+Texture: spot_shadow_fade.png: Loading 1 faces(PF_R8G8B8,128x128x1) with 7 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,128x128x1.
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 1 at 0x7d1300033398 by thread 4:
+    #0 gkStreamer::processBuffers() ??:0 (exe+0x00000087614f)
+    #1 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #2 gkThread::run() ??:0 (exe+0x00000084557c)
+    #3 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 1 at 0x7d1300033398 by main thread:
+    #0 gkStreamer::playSound(gkSource*) ??:0 (exe+0x0000008756e4)
+    #1 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #2 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #3 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #4 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #5 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #6 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #7 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #8 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #9 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #10 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #11 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #12 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #13 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #14 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #15 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #16 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #17 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #18 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #20 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 4 at 0x7d1300033338 by thread 4:
+    #0 utArray<gkBuffer*>::empty() const ??:0 (exe+0x00000088a1c6)
+    #1 gkStreamer::processBuffers() ??:0 (exe+0x0000008760e6)
+    #2 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 4 at 0x7d1300033338 by main thread:
+    #0 utArray<gkBuffer*>::push_back(gkBuffer* const&) ??:0 (exe+0x00000088a259)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x00000087572d)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 8 at 0x7d1300033340 by thread 4:
+    #0 utArray<gkBuffer*>::ptr() ??:0 (exe+0x00000088a2b7)
+    #1 gkStreamer::processBuffers() ??:0 (exe+0x0000008760fc)
+    #2 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d1300033340 by main thread:
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 8 at 0x7d0300163140 by thread 4:
+    #0 utArray<gkBuffer*>::push_back(gkBuffer* const&) ??:0 (exe+0x00000088a22d)
+    #1 gkStreamer::processBuffers() ??:0 (exe+0x00000087612a)
+    #2 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0300163140 by main thread:
+
+  Location is heap block of size 64 at 0x7d0300163140 allocated by main thread:
+    #0 operator new[](unsigned long) ??:0 (exe+0x0000010a4baa)
+    #1 utArray<gkBuffer*>::reserve(unsigned int) ??:0 (exe+0x00000088a468)
+    #2 utArray<gkBuffer*>::push_back(gkBuffer* const&) ??:0 (exe+0x00000088a224)
+    #3 gkStreamer::playSound(gkSource*) ??:0 (exe+0x00000087572d)
+    #4 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #5 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #6 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #7 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #8 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #9 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #10 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #11 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #12 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #13 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #14 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #15 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #16 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #17 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #18 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #19 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #21 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #22 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #23 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 1 at 0x7d0a000318d4 by thread 4:
+    #0 gkBuffer::stream() ??:0 (exe+0x0000008724d7)
+    #1 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #2 gkThread::run() ??:0 (exe+0x00000084557c)
+    #3 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a000318d0 by main thread:
+
+  Location is heap block of size 168 at 0x7d0a000318b0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 1 at 0x7d0a00031564 by thread 4:
+    #0 gkBuffer::stream() ??:0 (exe+0x0000008724d7)
+    #1 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #2 gkThread::run() ??:0 (exe+0x00000084557c)
+    #3 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a00031560 by main thread:
+    #0 gkSyncObj::wait() ??:0 (exe+0x00000091f666)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 168 at 0x7d0a00031540 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 8 at 0x7d0a000315f8 by main thread:
+    #0 gkSource::isBound() const ??:0 (exe+0x0000008201f7)
+    #1 gkSource::isPlaying() const ??:0 (exe+0x0000008173b5)
+    #2 gkSoundActuator::execute() ??:0 (exe+0x00000080e648)
+    #3 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #4 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #5 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #6 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #7 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #8 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #9 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #10 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #11 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #12 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #13 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #14 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #15 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #16 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #17 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #19 main ??:0 (exe+0x0000007a6fb7)
+
+  Previous write of size 8 at 0x7d0a000315f8 by thread 4:
+
+  Location is heap block of size 168 at 0x7d0a000315f0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSound::createSource() ??:0 (exe+0x0000008742ff)
+    #2 gkSoundActuator::execute() ??:0 (exe+0x00000080e552)
+    #3 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #4 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #5 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #6 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #7 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #8 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #9 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #10 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #11 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #12 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #13 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #14 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #15 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #16 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #17 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #19 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 1 at 0x7d0a000314b1 by main thread:
+    #0 gkBuffer::setPosition(Ogre::Vector3 const&) ??:0 (exe+0x000000871edd)
+    #1 gkSource::updatePropsForObject(gkGameObject*) ??:0 (exe+0x00000087349d)
+    #2 gkSoundActuator::execute() ??:0 (exe+0x00000080e698)
+    #3 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #4 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #5 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #6 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #7 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #8 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #9 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #10 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #11 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #12 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #13 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #14 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #15 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #16 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #17 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #19 main ??:0 (exe+0x0000007a6fb7)
+
+  Previous write of size 1 at 0x7d0a000314b1 by thread 4:
+
+  Location is heap block of size 168 at 0x7d0a00031490 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 4 at 0x7d0a00031480 by thread 4:
+    #0 gkBuffer::queue(bool) ??:0 (exe+0x0000008720ee)
+    #1 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #2 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a00031480 by main thread:
+    #0 gkSyncObj::wait() ??:0 (exe+0x00000091f666)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 168 at 0x7d0a000313e0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 8 at 0x7d0a000313e8 by thread 4:
+    #0 gkBuffer::read(unsigned int, unsigned int&) ??:0 (exe+0x000000872248)
+    #1 gkBuffer::queue(bool) ??:0 (exe+0x0000008720fc)
+    #2 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #3 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #4 gkThread::run() ??:0 (exe+0x00000084557c)
+    #5 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a000313e8 by main thread:
+
+  Location is heap block of size 168 at 0x7d0a000313e0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 1 at 0x7d0a00031474 by thread 4:
+    #0 gkBuffer::read(unsigned int, unsigned int&) ??:0 (exe+0x000000872260)
+    #1 gkBuffer::queue(bool) ??:0 (exe+0x0000008720fc)
+    #2 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #3 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #4 gkThread::run() ??:0 (exe+0x00000084557c)
+    #5 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 1 at 0x7d0a00031474 by main thread:
+
+  Location is heap block of size 168 at 0x7d0a000313e0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 4 at 0x7d0a000313f0 by thread 4:
+    #0 gkBuffer::queue(bool) ??:0 (exe+0x00000087211f)
+    #1 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #2 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a000313f0 by main thread:
+
+  Location is heap block of size 168 at 0x7d0a000313e0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 4 at 0x7d0a00031478 by thread 4:
+    #0 gkBuffer::queue(bool) ??:0 (exe+0x000000872133)
+    #1 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #2 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a00031478 by main thread:
+
+  Location is heap block of size 168 at 0x7d0a000313e0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 8 at 0x7d0a00031338 by thread 4:
+    #0 gkBuffer::read(unsigned int, unsigned int&) ??:0 (exe+0x000000872248)
+    #1 gkBuffer::queue(bool) ??:0 (exe+0x0000008720fc)
+    #2 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #3 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #4 gkThread::run() ??:0 (exe+0x00000084557c)
+    #5 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a00031338 by main thread:
+    #0 gkSyncObj::wait() ??:0 (exe+0x00000091f666)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 168 at 0x7d0a00031330 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 1 at 0x7d0a00031314 by thread 4:
+    #0 gkBuffer::read(unsigned int, unsigned int&) ??:0 (exe+0x000000872260)
+    #1 gkBuffer::queue(bool) ??:0 (exe+0x0000008720fc)
+    #2 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #3 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #4 gkThread::run() ??:0 (exe+0x00000084557c)
+    #5 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 1 at 0x7d0a00031314 by main thread:
+    #0 gkBuffer::gkBuffer(gkSource*) ??:0 (exe+0x000000871668)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x00000087570e)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 168 at 0x7d0a00031280 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Write of size 1 at 0x7d1300033399 by main thread:
+    #0 gkStreamer::stopSound(gkSource*) ??:0 (exe+0x0000008757cf)
+    #1 gkSoundManager::stopSound(gkSource*) ??:0 (exe+0x000000873838)
+    #2 gkSource::stop() ??:0 (exe+0x00000087379b)
+    #3 gkSoundActuator::notifyActiveStatus() ??:0 (exe+0x00000080e48f)
+    #4 gkLogicBrick::setActive(bool) ??:0 (exe+0x00000081587f)
+    #5 gkLogicManager::clearActuators() ??:0 (exe+0x000000807e75)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x0000008080ae)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Previous read of size 1 at 0x7d1300033399 by thread 4:
+    #0 gkStreamer::processBuffers() ??:0 (exe+0x000000876275)
+    #1 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #2 gkThread::run() ??:0 (exe+0x00000084557c)
+    #3 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 4 at 0x7d0a00030fd0 by thread 4:
+    #0 gkBuffer::queue(bool) ??:0 (exe+0x00000087211f)
+    #1 gkBuffer::stream() ??:0 (exe+0x000000872500)
+    #2 gkStreamer::run() ??:0 (exe+0x0000008764bf)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d0a00030fd0 by main thread:
+    #0 gkSyncObj::wait() ??:0 (exe+0x00000091f666)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 168 at 0x7d0a00030fc0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkStreamer::playSound(gkSource*) ??:0 (exe+0x000000875700)
+    #2 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x00000087369b)
+    #3 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #4 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #5 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #6 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #7 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #8 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #9 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #10 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #11 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #12 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #13 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #14 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #15 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #16 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #17 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #18 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #19 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #20 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #21 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Write of size 4 at 0x7d1300033380 by main thread:
+    #0 utArray<gkSource*>::push_back(gkSource* const&) ??:0 (exe+0x000000889e49)
+    #1 gkStreamer::stopSound(gkSource*) ??:0 (exe+0x0000008757f5)
+    #2 gkSoundManager::stopSound(gkSource*) ??:0 (exe+0x000000873838)
+    #3 gkSource::stop() ??:0 (exe+0x00000087379b)
+    #4 gkSoundActuator::notifyActiveStatus() ??:0 (exe+0x00000080e48f)
+    #5 gkLogicBrick::setActive(bool) ??:0 (exe+0x00000081587f)
+    #6 gkLogicManager::clearActuators() ??:0 (exe+0x000000807e75)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x0000008080ae)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+  Previous read of size 4 at 0x7d1300033380 by thread 4:
+    #0 utArray<gkSource*>::empty() const ??:0 (exe+0x000000889ff6)
+    #1 gkStreamer::processBuffers() ??:0 (exe+0x000000876183)
+    #2 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Read of size 8 at 0x7d03000c6380 by thread 4:
+    #0 gkStreamer::processBuffers() ??:0 (exe+0x0000008761d8)
+    #1 gkStreamer::run() ??:0 (exe+0x000000876467)
+    #2 gkThread::run() ??:0 (exe+0x00000084557c)
+    #3 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous write of size 8 at 0x7d03000c6380 by main thread:
+    #0 utArray<gkSource*>::push_back(gkSource* const&) ??:0 (exe+0x000000889e3a)
+    #1 gkStreamer::stopSound(gkSource*) ??:0 (exe+0x0000008757f5)
+    #2 gkSoundManager::stopSound(gkSource*) ??:0 (exe+0x000000873838)
+    #3 gkSource::stop() ??:0 (exe+0x00000087379b)
+    #4 gkSoundActuator::notifyActiveStatus() ??:0 (exe+0x00000080e48f)
+    #5 gkLogicBrick::setActive(bool) ??:0 (exe+0x00000081587f)
+    #6 gkLogicManager::clearActuators() ??:0 (exe+0x000000807e75)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x0000008080ae)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 64 at 0x7d03000c6380 allocated by main thread:
+    #0 operator new[](unsigned long) ??:0 (exe+0x0000010a4baa)
+    #1 utArray<gkSource*>::reserve(unsigned int) ??:0 (exe+0x00000088a0c8)
+    #2 utArray<gkSource*>::push_back(gkSource* const&) ??:0 (exe+0x000000889e14)
+    #3 gkStreamer::stopSound(gkSource*) ??:0 (exe+0x0000008757f5)
+    #4 gkSoundManager::stopSound(gkSource*) ??:0 (exe+0x000000873838)
+    #5 gkSource::stop() ??:0 (exe+0x00000087379b)
+    #6 gkSoundActuator::notifyActiveStatus() ??:0 (exe+0x00000080e48f)
+    #7 gkLogicBrick::setActive(bool) ??:0 (exe+0x00000081587f)
+    #8 gkLogicManager::clearActuators() ??:0 (exe+0x000000807e75)
+    #9 gkLogicManager::update(float) ??:0 (exe+0x0000008080ae)
+    #10 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #11 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #12 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #13 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #14 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #15 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #16 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #17 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #18 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #19 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #20 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #22 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #23 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #24 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Write of size 1 at 0x7d1300033331 by main thread:
+    #0 gkStreamer::stopAllSounds() ??:0 (exe+0x000000874ce9)
+    #1 gkSoundManager::stopAllSounds() ??:0 (exe+0x000000874bfd)
+    #2 gkEngine::finalize() ??:0 (exe+0x0000007b9f48)
+    #3 gkEngine::~gkEngine() ??:0 (exe+0x0000007bfcc2)
+    #4 gkEngine::~gkEngine() ??:0 (exe+0x0000007bfc48)
+    #5 gkCoreApplication::~gkCoreApplication() ??:0 (exe+0x0000007b96f9)
+    #6 OgreKit::~OgreKit() ??:0 (exe+0x0000007af1d8)
+    #7 OgreKit::~OgreKit() ??:0 (exe+0x0000007a8e65)
+    #8 main ??:0 (exe+0x0000007a6fc2)
+    #9 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #10 main ??:0 (exe+0x0000007a6fb7)
+
+  Previous read of size 1 at 0x7d1300033331 by thread 4:
+    #0 gkStreamer::run() ??:0 (exe+0x00000087652d)
+    #1 gkThread::run() ??:0 (exe+0x00000084557c)
+    #2 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Write of size 4 at 0x7d1300033350 by thread 4:
+    #0 utArray<gkBuffer*>::clear(bool) ??:0 (exe+0x00000088a417)
+    #1 gkStreamer::finishBuffers() ??:0 (exe+0x000000876357)
+    #2 gkStreamer::run() ??:0 (exe+0x00000087655b)
+    #3 gkThread::run() ??:0 (exe+0x00000084557c)
+    #4 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Previous read of size 4 at 0x7d1300033350 by main thread:
+    #0 utArray<gkBuffer*>::empty() const ??:0 (exe+0x00000088a1c6)
+    #1 gkStreamer::stopAllSounds() ??:0 (exe+0x000000874cdb)
+    #2 gkSoundManager::stopAllSounds() ??:0 (exe+0x000000874bfd)
+    #3 gkEngine::finalize() ??:0 (exe+0x0000007b9f48)
+    #4 gkEngine::~gkEngine() ??:0 (exe+0x0000007bfcc2)
+    #5 gkEngine::~gkEngine() ??:0 (exe+0x0000007bfc48)
+    #6 gkCoreApplication::~gkCoreApplication() ??:0 (exe+0x0000007b96f9)
+    #7 OgreKit::~OgreKit() ??:0 (exe+0x0000007af1d8)
+    #8 OgreKit::~OgreKit() ??:0 (exe+0x0000007a8e65)
+    #9 main ??:0 (exe+0x0000007a6fc2)
+    #10 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #11 main ??:0 (exe+0x0000007a6fb7)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: data race (pid=14676)
+  Write of size 1 at 0x7d1300033330 by main thread:
+    #0 gkStreamer::stop() ??:0 (exe+0x000000875f45)
+    #1 gkStreamer::exit() ??:0 (exe+0x00000087594b)
+    #2 gkSoundManager::notifyDestroyAllImpl() ??:0 (exe+0x000000875917)
+    #3 gkResourceManager::destroyAll() ??:0 (exe+0x0000007c0579)
+    #4 gkSoundManager::~gkSoundManager() ??:0 (exe+0x00000087492e)
+    #5 gkSoundManager::~gkSoundManager() ??:0 (exe+0x000000874878)
+    #6 gkEngine::finalize() ??:0 (exe+0x0000007ba118)
+    #7 gkEngine::~gkEngine() ??:0 (exe+0x0000007bfcc2)
+    #8 gkEngine::~gkEngine() ??:0 (exe+0x0000007bfc48)
+    #9 gkCoreApplication::~gkCoreApplication() ??:0 (exe+0x0000007b96f9)
+    #10 OgreKit::~OgreKit() ??:0 (exe+0x0000007af1d8)
+    #11 OgreKit::~OgreKit() ??:0 (exe+0x0000007a8e65)
+    #12 main ??:0 (exe+0x0000007a6fc2)
+    #13 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #14 main ??:0 (exe+0x0000007a6fb7)
+
+  Previous read of size 1 at 0x7d1300033330 by thread 4:
+    #0 gkStreamer::run() ??:0 (exe+0x000000876540)
+    #1 gkThread::run() ??:0 (exe+0x00000084557c)
+    #2 gkThread::task(void*) ??:0 (exe+0x000000845545)
+
+  Location is heap block of size 320 at 0x7d13000332c0 allocated by main thread:
+    #0 operator new(unsigned long) ??:0 (exe+0x0000010a4aea)
+    #1 gkSoundManager::initialize() ??:0 (exe+0x0000008747b8)
+    #2 gkSoundManager::gkSoundManager() ??:0 (exe+0x0000008745c8)
+    #3 gkEngine::initialize() ??:0 (exe+0x0000007b9c77)
+    #4 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #5 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #6 main ??:0 (exe+0x0000007a6fb7)
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
+==================
+WARNING: ThreadSanitizer: heap-use-after-free (pid=14676)
+  Read of size 8 at 0x7f8127533640 by thread 4:
+    #0 gkThread::run() ??:0 (exe+0x000000845569)
+    #1 <null> <null>:0 (0x000000000004)
+
+  Previous write of size 8 at 0x7f8127533640 by main thread:
+
+  Thread 4 (tid=14702, running) created at:
+    #0 pthread_create ??:0 (exe+0x0000010a6b2e)
+    #1 gkThread::gkThread(gkCall*) ??:0 (exe+0x0000008455dc)
+    #2 gkStreamer::start() ??:0 (exe+0x000000875654)
+    #3 gkSoundManager::playSound(gkSource*) ??:0 (exe+0x000000873688)
+    #4 gkSource::play() ??:0 (exe+0x0000008735f1)
+    #5 gkSoundActuator::execute() ??:0 (exe+0x00000080e667)
+    #6 gkLogicActuator::_execute() ??:0 (exe+0x000000805bc9)
+    #7 gkLogicManager::update(float) ??:0 (exe+0x00000080807f)
+    #8 gkScene::update(float) ??:0 (exe+0x0000007c1dda)
+    #9 gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c1c1b)
+    #10 non-virtual thunk to gkEngine::Private::tickImpl(float) ??:0 (exe+0x0000007c2259)
+    #11 gkTickState::tick() ??:0 (exe+0x0000007c1633)
+    #12 gkEngine::Private::frameRenderingQueued(Ogre::FrameEvent const&) ??:0 (exe+0x0000007c1429)
+    #13 Ogre::Root::_fireFrameRenderingQueued(Ogre::FrameEvent&) ??:0 (exe+0x000000bcb5d9)
+    #14 Ogre::Root::_fireFrameRenderingQueued() ??:0 (exe+0x000000bcb96f)
+    #15 Ogre::Root::_updateAllRenderTargets() ??:0 (exe+0x000000bcbe15)
+    #16 Ogre::Root::renderOneFrame() ??:0 (exe+0x000000bcbda6)
+    #17 gkEngine::stepOneFrame() ??:0 (exe+0x0000007c1278)
+    #18 gkEngine::run() ??:0 (exe+0x0000007b98a7)
+    #19 gkCoreApplication::run() ??:0 (exe+0x0000007b9780)
+    #20 gkCoreApplication::initialize() ??:0 (exe+0x0000007b97d4)
+    #21 gkCoreApplication::run() ??:0 (exe+0x0000007b9765)
+    #22 main ??:0 (exe+0x0000007a6fb7)
+
+==================
