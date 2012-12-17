@@ -7,5 +7,30 @@ The patch is provided in patch/ .
 2. apirace do not detect as 'NumBlocks' is not class member.
 --------------------------------------
 
+Compilation
 
+pbzip2: 
+    just `make' under large-test
 
+gamekit: 
+    svn co -R 1219 http://gamekit.googlecode.com/svn/trunk/ gamekit
+    export CC=clang
+    export CXX=$PATH_TO_BIN/clang-apirace.sh
+    cd gamekit
+    mkdir build
+    cd build
+    cmake ../
+    make 
+
+firefox:
+(1) modify.mozconfig
+    CC=clang
+    CXX=clang++
+(2) make -f config.mk configure
+(3) cd /obj-dir****
+(4) modify ./config/autoconf.mk and  ./js/src/config/autoconf.mk
+    CXX=/home/jing/src/APIRace/bin/clang-apirace.sh
+    HOST_CXX=/home/jing/src/APIRace/bin/clang-apirace.sh
+(5) /obj-dir***/memory/mozalloc/Makefile  (maybe wrong)
+    add CXX and HOST_CXX = clang++
+(6) make -j 10
