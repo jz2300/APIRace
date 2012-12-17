@@ -10,7 +10,8 @@ The patch is provided in patch/ .
 Compilation
 
 pbzip2: 
-    just `make' under large-test
+    get pbzip2-1.1.6.tar.gz and put it in tarball/
+    just `make' under large-test/
 
 gamekit: 
     svn co -R 1219 http://gamekit.googlecode.com/svn/trunk/ gamekit
