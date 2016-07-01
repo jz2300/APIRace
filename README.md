@@ -12,4 +12,4 @@ There is no intention to continue this project.
 
 License
 =======
-BSD
+MIT
